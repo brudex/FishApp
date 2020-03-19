@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="regions">
+        <item>Greater Accra Region</item>
+        <item>Central Region </item>
+        <item>Eastern Region</item>
+        <item>Western Region</item>
+        <item>Ashanti Region</item>
+        <item>Northern Region</item>
+        <item>Upper East Region</item>
+        <item>Upper West Region</item>
+        <item>Volta Region</item>
+        <item>Bono Region</item>
+        <item>Oti Region</item>
+        <item>Bono East Region</item>
+        <item>Ahafo Region</item>
+        <item>North East Region</item>
+        <item>Savannah Region</item>
+        <item>Western North Region</item>
+    </string-array>
+
+    <string-array name="feed">
+        <item>0.5</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+</resources>

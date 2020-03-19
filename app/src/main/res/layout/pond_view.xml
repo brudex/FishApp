@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_margin="10dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/nnn"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:src="@drawable/logofish"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_toEndOf="@+id/nnn"
+            android:singleLine="true"
+            android:text="text"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="60dp"
+           android:orientation="horizontal"
+           android:gravity="bottom"
+           android:layout_alignParentBottom="true">
+
+           <RelativeLayout
+               android:id="@+id/rel3"
+               android:layout_width="match_parent"
+               android:layout_height="60dp"
+               android:layout_weight="1"
+               >
+
+               <ImageView
+                   android:id="@+id/img3"
+                   android:layout_width="50dp"
+                   android:layout_height="30dp"
+                   android:layout_centerVertical="true"
+                   android:src="@drawable/clinic" />
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerVertical="true"
+                   android:layout_toRightOf="@+id/img3"
+                   android:text="Fish Health Management"
+                   android:textColor="@color/black"
+                   android:textSize="17sp" />
+           </RelativeLayout>
+
+           <RelativeLayout
+               android:id="@+id/rel4"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_weight="1">
+
+               <ImageView
+                   android:id="@+id/img4"
+                   android:layout_width="50dp"
+                   android:layout_height="30dp"
+                   android:layout_centerVertical="true"
+                   android:src="@drawable/database" />
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerVertical="true"
+                   android:layout_toRightOf="@+id/img4"
+                   android:text="Production Data"
+                   android:textColor="@color/black"
+                   android:textSize="17sp" />
+           </RelativeLayout>
+
+       </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

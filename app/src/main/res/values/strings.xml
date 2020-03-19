@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Fish Farm Tracker</string>
+    <string name="Region">Region</string>
+    <string name="ponds">Pond Types</string>
+</resources>
