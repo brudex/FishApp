@@ -22,8 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.inspierra.fishapp.HelpingClasses.AddPondRequestClass;
 import com.inspierra.fishapp.HelpingClasses.AddPondResponseClass;
-import com.inspierra.fishapp.HelpingClasses.PondTypesClass;
-import com.inspierra.fishapp.HelpingClasses.PondsClass;
+
 import com.inspierra.fishapp.HelpingClasses.UserPondsClass;
 import com.inspierra.fishapp.R;
 import com.inspierra.fishapp.Utilities.AcquaApiClient;
@@ -31,7 +30,7 @@ import com.inspierra.fishapp.Utilities.AcquahService;
 import com.inspierra.fishapp.Utilities.BusStation;
 import com.inspierra.fishapp.Utilities.PrefsUtil;
 import com.libizo.CustomEditText;
-import com.squareup.otto.Subscribe;
+import com.raywenderlich.android.validatetor.ValidateTor;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +38,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import br.com.joinersa.oooalertdialog.Animation;
+import br.com.joinersa.oooalertdialog.OnClickListener;
+import br.com.joinersa.oooalertdialog.OoOAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,10 +54,9 @@ public class MyPondsActivity extends AppCompatActivity
     AcquahService acquahService;
     AddPondRequestClass requestClass;
     Spinner pondTypes;
-    FloatingActionButton add_fab;
-
-    ArrayList<PondTypesClass> pondList;
-    List<String> ponds;
+    ValidateTor validateTor = new ValidateTor();
+    List<String> validationErrors;
+    List<String> productionUnitTypes;
     UserPondsClass pond;
     RelativeLayout relback;
     @Override
@@ -64,7 +65,7 @@ public class MyPondsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_ponds_layout);
         BusStation.getBus().register(this);
-
+        validationErrors=new ArrayList<>();
         Intent intent = getIntent();
         pond = new Gson().fromJson(intent.getStringExtra("pond"), UserPondsClass.class);
 
@@ -72,8 +73,7 @@ public class MyPondsActivity extends AppCompatActivity
         {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            // setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
-        }
+         }
         if (Build.VERSION.SDK_INT >= 19)
         {
             getWindow().getDecorView().setSystemUiVisibility(
@@ -84,8 +84,7 @@ public class MyPondsActivity extends AppCompatActivity
         {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-          /* setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);*/
+
         }
 
         progressDialog = new ProgressDialog(this);
@@ -95,8 +94,7 @@ public class MyPondsActivity extends AppCompatActivity
         progressDialog.setCancelable(false);
         acquahService = AcquaApiClient.getClient().create(AcquahService.class);
         requestClass = new AddPondRequestClass();
-
-        relback = findViewById(R.id.relback);
+        relback = findViewById(R.id.imgBack);
         relback.setOnClickListener(v -> onBackPressed());
         pondName = findViewById(R.id.pondName);
         cubicSize = findViewById(R.id.cubicSize);
@@ -128,27 +126,24 @@ public class MyPondsActivity extends AppCompatActivity
         {
             String error = ex.getMessage();
         }
-
-
         new getPondTypes().execute();
-
         pondTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
+                if(productionUnitTypes!=null){
+                    requestClass.pondType=productionUnitTypes.get(position);
+                }
 
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent)
             {
 
             }
         });
-
         chk_large.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
             if (isChecked)
             {
                 chk_small.setChecked(false);
@@ -168,12 +163,39 @@ public class MyPondsActivity extends AppCompatActivity
         });
 
         btnSubmit.setOnClickListener(v -> {
-            requestClass.cubicSize = Integer.parseInt(Objects.requireNonNull(cubicSize.getText()).toString().trim());
             requestClass.pondName = Objects.requireNonNull(pondName.getText()).toString().trim();
-            progressDialog.show();
-            new doAddPond().execute();
+            if(validateFields()){
+                requestClass.cubicSize = Integer.parseInt(Objects.requireNonNull(cubicSize.getText()).toString().trim());
+                progressDialog.show();
+                new doAddPond().execute();
+            }else{
+                Toast.makeText(this,"Please complete all field correctly",Toast.LENGTH_SHORT).show();
+            }
+
         });
     }
+
+    private boolean validateFields(){
+        validationErrors.clear();
+        if (validateTor.isEmpty(cubicSize.getText().toString()) ) {
+            cubicSize.setError("Cubic size is required");
+            validationErrors.add("Cubic size is required");
+        }
+        if (!validateTor.isNumeric(cubicSize.getText().toString()) ) {
+            cubicSize.setError("Cubic size must be numeric");
+            validationErrors.add("Cubic size must be numeric");
+        }
+        if (validateTor.isEmpty(requestClass.pondName)) {
+            pondName.setError("Production unit name is required");
+            validationErrors.add("Production unit name is required");
+        }
+        if (validateTor.isEmpty(requestClass.pondType)) {
+            Toast.makeText(this,"Select production unit type",Toast.LENGTH_LONG).show();
+            validationErrors.add("Production unit type is required");
+        }
+        return validationErrors.size() <= 0;
+    }
+
 
     class doAddPond extends AsyncTask<Void, Void, Void>
     {
@@ -200,19 +222,28 @@ public class MyPondsActivity extends AppCompatActivity
                                 UserPondsClass bb = new UserPondsClass();
                                 bb.identity=4;
                                 BusStation.getBus().post(bb);
-                                Toast.makeText(MyPondsActivity.this, "Pond Data Added Successfully",
-                                        Toast.LENGTH_SHORT).show();
-                                MyPondsActivity.this.onBackPressed();
+                                new OoOAlertDialog.Builder(MyPondsActivity.this)
+                                        .setTitle("Success")
+                                        .setMessage("Production unit Added Successfully")
+                                        .setAnimation(Animation.POP)
+                                        .setPositiveButton("Ok", new OnClickListener() {
+                                            @Override
+                                            public void onClick() {
+                                                onBackPressed();
+                                            }
+                                        })
+                                        .setPositiveButtonColor(R.color.green)
+                                        .build();
                             }
                             else
                             {
-                                Toast.makeText(MyPondsActivity.this, "Pond Data Add Failed",
+                                Toast.makeText(MyPondsActivity.this, "Adding Production unit failed",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
                         catch (Exception ex)
                         {
-                            Toast.makeText(MyPondsActivity.this, "Pond Data Add Failed",
+                            Toast.makeText(MyPondsActivity.this, "Adding Production unit Failed",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -240,21 +271,22 @@ public class MyPondsActivity extends AppCompatActivity
         @Override
         protected Void doInBackground(Void... voids)
         {
-            final Call<String[]> getPonds =
+            final Call<List<String>> getPonds =
                     acquahService.GetPondTypes(PrefsUtil.getTempTokenData(MyPondsActivity.this));
-            getPonds.enqueue(new Callback<String[]>()
+            getPonds.enqueue(new Callback<List<String>>()
             {
                 @Override
-                public void onResponse(@NotNull Call<String[]> call, @NotNull Response<String[]> response)
+                public void onResponse(@NotNull Call<List<String>> call, @NotNull Response<List<String>> response)
                 {
                     assert response.body() != null;
+                    productionUnitTypes = response.body();
                     ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(MyPondsActivity.this,
-                            android.R.layout.simple_spinner_item, response.body());
+                            android.R.layout.simple_spinner_item, productionUnitTypes);
                     runOnUiThread(() -> pondTypes.setAdapter(dataAdapter));
                 }
 
                 @Override
-                public void onFailure(@NotNull Call<String[]> call, @NotNull Throwable t)
+                public void onFailure(@NotNull Call<List<String>> call, @NotNull Throwable t)
                 {
 
                 }

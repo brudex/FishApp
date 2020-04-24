@@ -36,6 +36,8 @@ import com.libizo.CustomEditText;
 
 import org.jetbrains.annotations.NotNull;
 
+import br.com.joinersa.oooalertdialog.Animation;
+import br.com.joinersa.oooalertdialog.OoOAlertDialog;
 import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
 import cafe.adriel.androidaudiorecorder.model.AudioChannel;
 import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
@@ -68,46 +70,40 @@ public class FishHealthActivity extends AppCompatActivity
     String filePath;
     int color;
     int requestCode = 0;
-    RelativeLayout relback;
+    RelativeLayout relBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fish_health_layout);
-
-        BusStation.getBus().register(this);
         Intent intent = getIntent();
         pond = new Gson().fromJson(intent.getStringExtra("pond"), UserPondsClass.class);
 
         filePath = Environment.getExternalStorageDirectory() + "/recorded_audio.wav";
-        color = getResources().getColor(R.color.blueGray200);
 
-        pond = new Gson().fromJson(intent.getStringExtra("pond"), UserPondsClass.class);
-        ActivityCompat.requestPermissions(this,
-                new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO, READ_EXTERNAL_STORAGE}, 0);
+//        ActivityCompat.requestPermissions(this,
+//                new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO, READ_EXTERNAL_STORAGE}, 0);
 
-       //ss ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, 0);
-
-        //make fully Android Transparent Status bar
-        if (Build.VERSION.SDK_INT >= 21)
-        { acquahService = AcquaApiClient.getClient().create(AcquahService.class); }
+//        ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, 0);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please Wait..."); // Setting Message
+        progressDialog.setMessage("Saving Data"); // Setting Message
         progressDialog.setTitle("Processing"); // Setting Title
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
         progressDialog.setCancelable(false);
-        {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-          /* setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);*/
-        }
-
-        relback = findViewById(R.id.relback);
-        relback.setOnClickListener(v -> onBackPressed());
+        acquahService = AcquaApiClient.getClient().create(AcquahService.class);
+//
+//        if (Build.VERSION.SDK_INT >= 21)
+//        {
+//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//          /* setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);*/
+//        }
+//
+        relBack = findViewById(R.id.relBack);
         relRecord = findViewById(R.id.relRecord);
-        pondId = findViewById(R.id.pondId);
+//        pondId = findViewById(R.id.pondId);
         colorOfWater = findViewById(R.id.colorOfWater);
         waterPicture = findViewById(R.id.waterPicture);
         FishDisease = findViewById(R.id.FishDisease);
@@ -119,7 +115,9 @@ public class FishHealthActivity extends AppCompatActivity
         Nitrite = findViewById(R.id.Nitrite);
         Turbidity = findViewById(R.id.Turbidity);
         btnSubmit = findViewById(R.id.btnSubmit);
-
+        relBack.setOnClickListener(v -> {
+            onBackPressed();
+        });
         FishDisease.setOnClickListener(v ->
         {
             if (ActivityCompat.checkSelfPermission(FishHealthActivity.this, Manifest.permission.CAMERA)
@@ -164,14 +162,14 @@ public class FishHealthActivity extends AppCompatActivity
         btnSubmit.setOnClickListener(v -> {
             progressDialog.show();
             requestClass = new SaveFishHealthRequestClass();
+            requestClass.pondId = pond.pondId;
             requestClass.colorOfWater = colorOfWater.getText().toString().trim();
-             requestClass.mortality = mortality.getText().toString().trim();
+            requestClass.mortality = mortality.getText().toString().trim();
             requestClass.phLevel = Integer.parseInt(phLevel.getText().toString().trim());
             requestClass.dissolvedOxygen = Integer.parseInt(Oxygen.getText().toString().trim());
             requestClass.ammonia = Integer.parseInt(Ammonia.getText().toString().trim());
             requestClass.nitrite = Integer.parseInt(Nitrite.getText().toString().trim());
             requestClass.turbidity = Integer.parseInt(Turbidity.getText().toString().trim());
-
             new saveHealth().execute();
         });
 
@@ -180,14 +178,12 @@ public class FishHealthActivity extends AppCompatActivity
                 .setFilePath(filePath)
                 .setColor(color)
                 .setRequestCode(requestCode)
-
                 // Optional
                 .setSource(AudioSource.MIC)
                 .setChannel(AudioChannel.STEREO)
                 .setSampleRate(AudioSampleRate.HZ_48000)
                 .setAutoStart(true)
                 .setKeepDisplayOn(true)
-
                 // Start recording
                 .record());
 
@@ -213,8 +209,13 @@ public class FishHealthActivity extends AppCompatActivity
                     {
                         if (response.body().status.equals("00"))
                         {
-                            Toast.makeText(FishHealthActivity.this, "Fish Data Added Successfully",
-                                    Toast.LENGTH_SHORT).show();
+                            new OoOAlertDialog.Builder(FishHealthActivity.this)
+                                    .setTitle("Success")
+                                    .setMessage("Data successfully saved")
+                                    .setAnimation(Animation.POP)
+                                    .setPositiveButton("Ok", null)
+                                    .setPositiveButtonColor(R.color.green)
+                                    .build();
                         }
                         else
                         {

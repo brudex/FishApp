@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.inspierra.fishapp.HelpingClasses.LoginResponseClass;
+import com.inspierra.fishapp.HelpingClasses.ProfileClass;
 
 public class PrefsUtil
 {
@@ -40,6 +41,13 @@ public class PrefsUtil
         editor.apply();
     }
 
+    public static void clearUserData(Context context)
+    {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+        editor.clear();
+        editor.apply();
+     }
+
     public static String getTempTokenData(Context context)
     {
         String data = getSharedPreferences(context).getString("TOKEN",
@@ -48,11 +56,11 @@ public class PrefsUtil
         return dd.token;
     }
 
-    public static LoginResponseClass getUserData(Context context)
+    public static ProfileClass getUserProfile(Context context)
     {
         String data = getSharedPreferences(context).getString("TOKEN",
                 null);
         LoginResponseClass dd = new Gson().fromJson(data, LoginResponseClass.class);
-        return dd;
+        return dd.profile;
     }
 }

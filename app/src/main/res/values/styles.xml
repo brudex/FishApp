@@ -2,43 +2,65 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/zenith_red</item>
-        <item name="colorPrimaryDark">@color/new_red</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+     </style>
+    <style name="AppTheme.Widget"/>
 
-    <style name="ContentImageBadgeTitle" parent="AppTheme">
-        <item name="android:alpha">0.5</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">12dp</item>
-        <!-- <item name="dialogSheetAccent">@color/colorAccent</item>-->
+    <style name="AppTheme.Widget.TextView" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:fontFamily">@font/appfont1</item>
     </style>
-
-    <style name="ContentImageBadgeText" parent="AppTheme">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">20dp</item>
+    <style name="TextAppearance.Default" parent="android:TextAppearance">
+        <!-- Custom Attr-->
+        <item name="android:fontFamily">@font/appfont1</item>
+     </style>
+    <style name="FormLabel">
+        <item name="android:fontFamily">@font/appfont1</item>
         <item name="android:textStyle">bold</item>
-        <!-- <item name="dialogSheetAccent">@color/colorAccent</item>-->
-
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="FormLabel.White">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/appfont1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="FormLabel.BlueBlack">
+        <item name="android:textColor">#032743</item>
+        <item name="android:fontFamily">@font/appfont1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="FormLabel.Gray">
+        <item name="android:textColor">#3B6381</item>
+        <item name="android:fontFamily">@font/appfont1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="ContentMainBadgeTitle" parent="AppTheme">
-        <item name="android:textColor">@color/contentBadgeTitle</item>
-        <item name="android:textSize">12dp</item>
+    <style name="FormLabel.Black">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/appfont1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="headerTitle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/appfont1</item>
     </style>
 
-    <style name="TitleBadgeText" parent="AppTheme">
-        <item name="android:textColor">@color/titleBadgeText</item>
-        <item name="android:textSize">20dp</item>
+    <style name="headerTitle2">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/appfont1</item>
     </style>
 
-    <style name="TitleBadgeTitle" parent="AppTheme">
-        <item name="android:textColor">@color/titleBadgeTitle</item>
-        <item name="android:textSize">12dp</item>
-    </style>
-
-    <style name="FullScreenDialogStyle"></style>
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintTextAppearance">@style/HintText</item>
@@ -63,13 +85,6 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <!--<style name="AppTheme.ProfileTheme">
-        <item name="colorPrimaryDark">@color/profilePrimaryDark</item>
-        <item name="colorAccent">@color/profileAccentColor</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:textColor">@color/whiteTextColor</item>
-    </style>-->
 
     <style name="TransparentText" parent="@android:style/TextAppearance">
         <item name="android:textColor">#00000000</item>
@@ -79,19 +94,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-
-    <!--<style name="headerText" parent="parent">
-        <item name="android:textSize">@dimen/headerTextSize</item>
-        <item name="android:textColor">@color/blackTextColor</item>
-        <item name="android:textStyle">bold</item>
-    </style>-->
-
-    <!--<style name="textInputHintStyle" parent="TextAppearance.AppCompat.Medium.Inverse">
-        <item name="android:textColorHint">@color/blackTextColor</item>
-        <item name="android:textColor">@color/blackTextColor</item>
-        <item name="android:textSize">17sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>-->
 
     <style name="viewParent">
         <item name="android:layout_width">wrap_content</item>
@@ -109,26 +111,13 @@
         <item name="android:layout_alignParentLeft">true</item>
     </style>
 
-    <!-- <style name="profileDetailsTextMain" parent="viewParent">
-         <item name="android:textColor">@color/blackTextColor</item>
-         <item name="android:textStyle">bold</item>
-         <item name="android:textSize">16sp</item>
-         <item name="android:layout_marginLeft">10dp</item>
-     </style>-->
 
-    <!--<style name="profileDetailsMiniText" parent="viewParent">
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:textColor">@color/blackTextColor</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:layout_marginLeft">10dp</item>
-    </style>-->
 
-    <!--<style name="proifleDetailsView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">2dp</item>
-        <item name="android:background">@color/profileAccentColor</item>
-        <item name="android:layout_marginTop">5dp</item>
-    </style>-->
+    <style name="HeaderBar">
+        <item name="android:background">#034B83</item>
+    </style>
+
+
 
     <style name="profileStyledBackButton">
         <item name="android:layout_width">wrap_content</item>
@@ -144,5 +133,13 @@
         <item name="android:minWidth">250dp</item>
     </style>
 
+    <style name="Divider">
+        <item name="android:background">?android:attr/listDivider</item> //you can give your color here. that will change all divider color in your app.
+    </style>
+
+    <style name="Divider.Horizontal" parent="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item> // You can change thickness here.
+    </style>
 
 </resources>

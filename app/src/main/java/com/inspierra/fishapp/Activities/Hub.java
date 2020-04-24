@@ -13,13 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.inspierra.fishapp.HelpingClasses.LoginResponseClass;
+import com.inspierra.fishapp.HelpingClasses.SearchFarmersRequest;
 import com.inspierra.fishapp.R;
 import com.inspierra.fishapp.Utilities.PrefsUtil;
 
 public class Hub extends AppCompatActivity
 {
     CardView myProfile,farmTracker,farmConnect,farmTips;
-    LoginResponseClass userData;
+   // LoginResponseClass userData;
     TextView uname;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -51,7 +52,7 @@ public class Hub extends AppCompatActivity
         farmTracker = findViewById(R.id.farmTracker);
         farmConnect = findViewById(R.id.farmConnect);
         farmTips = findViewById(R.id.farmTips);
-        userData = PrefsUtil.getUserData(this);
+       // userData = PrefsUtil.getUserData(this);
         uname = findViewById(R.id.uname);
 
         myProfile.setOnClickListener(v -> {
@@ -61,7 +62,7 @@ public class Hub extends AppCompatActivity
             startActivity(new Intent(this,FarmTrackerActivity.class));
         });
         farmConnect.setOnClickListener(v -> {
-            startActivity(new Intent(this,FarmConnectActivity.class));
+            startActivity(new Intent(this, SearchFormActivity.class));
         });
         farmTips.setOnClickListener(v -> {
             startActivity(new Intent(this,FarmTipActivity.class));

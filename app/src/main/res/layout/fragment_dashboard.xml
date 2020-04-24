@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ui.dashboard.DashboardFragment">
+
+    <ScrollView
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         android:layout_marginEnd="10dp"
+        android:paddingBottom="20dp"
+        android:layout_marginStart="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relInputs">
+
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/dropCardInputs"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    card_view:cardCornerRadius="15dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:cardElevation="5dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        >
+
+                        <com.alespero.expandablecardview.ExpandableCardView
+                            android:id="@+id/expandableInputs"
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="wrap_content"
+                            app:icon="@drawable/ic_input_forms"
+                            app:title="Data Inputs"
+                             app:inner_view="@layout/expandable_dashboard_inputs"
+                            app:expandOnClick="true"
+                            app:animationDuration="300"
+                            app:startExpanded="false"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/dropCardOutputs"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dropCardInputs"
+                    android:layout_marginTop="30dp"
+                    card_view:cardCornerRadius="15dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:cardElevation="5dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        >
+                        <com.alespero.expandablecardview.ExpandableCardView
+                            android:id="@+id/expandableOutputs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             app:title="Data Outputs"
+                            app:icon="@drawable/ic_analytics"
+                            app:inner_view="@layout/expandable_dashboard_outputs"
+                            app:expandOnClick="true"
+                            app:animationDuration="300"
+                            app:startExpanded="false"/>
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

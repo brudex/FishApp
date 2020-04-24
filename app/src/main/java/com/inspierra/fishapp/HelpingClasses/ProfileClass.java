@@ -13,7 +13,23 @@ public class ProfileClass
     public int role ;
     public String location ;
     public String aboutFarm ;
+    public String nextMarketDate ;
     public int noOfPonds ;
     public int noOfHatcheries ;
     public int noOfCages ;
+    public String profilePicture;
+
+    public String getFullName() {
+        String fullName ="";
+        fullName+=firstName;
+        if(middleName!=null){
+            fullName+= " "+middleName;
+        }
+        if(lastName!=null){
+            fullName+=" "+lastName;
+        }
+        return fullName;
+    }
+
+
 }

@@ -51,11 +51,12 @@ public class PondsAdapter extends RecyclerView.Adapter
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)
     {
         UserPondsClass pp = ponds.get(position);
-        TextView txtName;
+        TextView txtName,tvPondType;
         RelativeLayout rel3, rel4;
         try
         {
-            txtName = holder.itemView.findViewById(R.id.txtName);
+            txtName = holder.itemView.findViewById(R.id.tvFarmName);
+            tvPondType = holder.itemView.findViewById(R.id.tvPondType);
             rel3 = holder.itemView.findViewById(R.id.rel3);
             rel4 = holder.itemView.findViewById(R.id.rel4);
 
@@ -71,6 +72,7 @@ public class PondsAdapter extends RecyclerView.Adapter
             });
 
             txtName.setText(pp.pondName);
+            tvPondType.setText(pp.pondType);
         }
         catch (Exception ex)
         {
@@ -87,7 +89,7 @@ public class PondsAdapter extends RecyclerView.Adapter
     private class ViewHolder extends RecyclerView.ViewHolder
     {
 
-        TextView txtName;
+        TextView txtName,tvPondType;
         RelativeLayout rel3, rel4;
 
         ViewHolder(View itemView)
@@ -95,7 +97,8 @@ public class PondsAdapter extends RecyclerView.Adapter
             super(itemView);
             try
             {
-                txtName = itemView.findViewById(R.id.txtName);
+                txtName = itemView.findViewById(R.id.tvFarmName);
+                tvPondType = itemView.findViewById(R.id.tvPondType);
                 rel3 = itemView.findViewById(R.id.rel3);
                 rel4 = itemView.findViewById(R.id.rel4);
             }

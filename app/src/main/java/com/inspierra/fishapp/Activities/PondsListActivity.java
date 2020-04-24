@@ -80,7 +80,7 @@ public class PondsListActivity extends AppCompatActivity
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
         progressDialog.setCancelable(false);
         acquahService = AcquaApiClient.getClient().create(AcquahService.class);
-        relback = findViewById(R.id.relback);
+        relback = findViewById(R.id.imgBack);
         relback.setOnClickListener(v -> onBackPressed());
         add_fab = findViewById(R.id.add_fab);
         ponds = findViewById(R.id.lstPonds);
@@ -169,7 +169,7 @@ public class PondsListActivity extends AppCompatActivity
                     mIntentt.putExtra("pond", new Gson().toJson(pond));
                     startActivity(mIntentt);
                 }else{
-                    Intent mIntent = new Intent(this, FishHealthOutputActivity.class);
+                    Intent mIntent = new Intent(this, ProductionDataOutputActivity.class);
                     mIntent.putExtra("pond", new Gson().toJson(pond));
                     startActivity(mIntent);
                 }

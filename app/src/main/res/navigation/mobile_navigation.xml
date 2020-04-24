@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.inspierra.fishapp.Activities.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.inspierra.fishapp.Activities.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/farmer_connect"
+        android:name="com.inspierra.fishapp.Activities.ui.farmerconnect.FarmerConnectFragment"
+        android:label="FarmerConnect"
+        tools:layout="@layout/fragment_search_form" />
+    <fragment
+        android:id="@+id/farm_tips"
+        android:name="com.inspierra.fishapp.Activities.ui.farmtips.FarmTipsFragment"
+        android:label="Farm Tips"
+        tools:layout="@layout/fragment_farm_tips" />
+</navigation>

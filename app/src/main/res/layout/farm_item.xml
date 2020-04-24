@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:layout_margin="10dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/nnn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/logofish"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/tvFarmName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/nnn"
+            android:singleLine="true"
+            android:text="text"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/rel6"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/tvFarmName"
+            >
+            <ImageView
+                android:id="@+id/img6"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/fishskeleton" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/img6"
+                android:text="Next Market Date :"
+                android:id="@+id/tvNmLabel"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvNmLabel"
+                android:text="Next Market Date :"
+                android:id="@+id/tvNextMarketDate"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rel8"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/rel6"
+        >
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="60dp"
+           android:orientation="horizontal"
+           android:gravity="bottom"
+
+           android:layout_alignParentBottom="true">
+
+           <RelativeLayout
+               android:id="@+id/rel3"
+               android:layout_width="match_parent"
+               android:layout_height="60dp"
+               android:layout_weight="1"
+               >
+               <ImageView
+                   android:id="@+id/img3"
+                   android:layout_width="50dp"
+                   android:layout_height="30dp"
+                   android:layout_centerVertical="true"
+                   android:src="@drawable/phone" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerVertical="true"
+                   android:layout_toRightOf="@+id/img3"
+                   android:text="233"
+                   android:id="@+id/txtPhone"
+                   android:textColor="@color/black"
+                   android:textSize="10sp" />
+           </RelativeLayout>
+
+           <RelativeLayout
+               android:id="@+id/rel4"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_weight="1">
+               <ImageView
+                   android:id="@+id/img4"
+                   android:layout_width="50dp"
+                   android:layout_height="30dp"
+                   android:layout_centerVertical="true"
+                   android:src="@drawable/email" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerVertical="true"
+                   android:layout_toRightOf="@+id/img4"
+                   android:text="Email"
+                   android:id="@+id/txtEmail"
+                   android:textColor="@color/black"
+                   android:textSize="10sp" />
+           </RelativeLayout>
+           <RelativeLayout
+               android:id="@+id/rel5"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_weight="1">
+               <ImageView
+                   android:id="@+id/img5"
+                   android:layout_width="50dp"
+                   android:layout_height="30dp"
+                   android:layout_centerVertical="true"
+                   android:src="@drawable/location" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_centerVertical="true"
+                   android:layout_toRightOf="@+id/img5"
+                   android:text="Location"
+                   android:id="@+id/txtLocation"
+                   android:textColor="@color/black"
+                   android:textSize="10sp" />
+           </RelativeLayout>
+
+       </LinearLayout>
+    </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

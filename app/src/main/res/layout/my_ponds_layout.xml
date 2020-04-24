@@ -8,48 +8,59 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/header_bg"
         android:layout_weight="0.8">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/fish4" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="Add Production Unit"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold" />
 
         <RelativeLayout
+            android:id="@+id/imgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:id="@+id/relback">
+            android:layout_marginTop="30dp"
+            >
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/arrowblack"
+                android:src="@drawable/arrowwhite"
                 android:layout_marginStart="0dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="Go Back"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="30dp"/>
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="10dp"
+            android:layout_marginTop="30dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fish_logo2"
+                android:layout_marginStart="0dp"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="60dp"
+            android:layout_below="@+id/imgback"
+            android:text="Add Production Unit"
+            style="@style/headerTitle2"
+            />
     </RelativeLayout>
 
     <ScrollView
@@ -64,43 +75,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/txtqqqq"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add a pond/Tank"
-                android:textSize="15sp" />
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtqqqq"
-                android:layout_marginTop="10dp">
+                 android:layout_marginTop="10dp">
 
                 <RelativeLayout
                     android:id="@+id/rel1"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
-                        android:layout_marginBottom="50dp"
                         android:gravity="center"
-                        android:text="Pond Name"
-                        android:textColor="@color/grey"
-                        android:textSize="10dp"
-                        android:textStyle="bold" />
+                        android:text="Production unit name"
+                        style="@style/FormLabel.Gray" />
 
                     <com.libizo.CustomEditText
                         android:id="@+id/pondName"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="50dp"
                         android:layout_marginStart="25dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginEnd="25dp"
-                        android:layout_marginBottom="15dp"
                         android:gravity="left|center"
                         android:inputType="textPersonName"
                         android:singleLine="true"
@@ -123,28 +124,25 @@
                 <RelativeLayout
                     android:id="@+id/rel2"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/rel1">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
-                        android:layout_marginBottom="50dp"
                         android:gravity="center"
                         android:text="Unit Type"
-                        android:textColor="@color/black"
-                        android:textSize="10dp" />
+                        style="@style/FormLabel.Gray" />
 
                     <LinearLayout
                         android:id="@+id/txtregion"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="25dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginEnd="25dp"
-                        android:layout_marginBottom="15dp"
-                        android:background="#bfffffff"
+                         android:background="#bfffffff"
                         android:gravity="left|center"
                         android:orientation="vertical">
 
@@ -153,8 +151,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:prompt="@string/ponds"
+                            android:background="@drawable/spinner_background"
                             android:spinnerMode="dialog" />
-
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -162,7 +160,7 @@
                 <RelativeLayout
                     android:id="@+id/rel3"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/rel2">
 
                     <TextView
@@ -172,16 +170,14 @@
                         android:layout_marginBottom="50dp"
                         android:gravity="center"
                         android:text="Cubic Size (in meters square)"
-                        android:textColor="@color/grey"
-                        android:textSize="10dp"
-                        android:textStyle="bold" />
+                        style="@style/FormLabel.Gray"/>
 
                     <com.libizo.CustomEditText
                         android:id="@+id/cubicSize"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="50dp"
                         android:layout_marginStart="25dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginEnd="25dp"
                         android:layout_marginBottom="15dp"
                         android:gravity="left|center"
@@ -206,7 +202,7 @@
                 <RelativeLayout
                     android:id="@+id/rel4"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/rel3">
 
                     <TextView
@@ -216,9 +212,7 @@
                         android:layout_marginBottom="50dp"
                         android:gravity="center"
                         android:text="Classification"
-                        android:textColor="@color/grey"
-                        android:textSize="10dp"
-                        android:textStyle="bold" />
+                        style="@style/FormLabel.Gray"/>
 
                     <com.google.android.material.checkbox.MaterialCheckBox
                         android:id="@+id/chkBxBig"
@@ -244,12 +238,11 @@
                     android:layout_height="60dp"
                     android:layout_below="@+id/rel4"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="25dp"
-                    app:lb_btnColor="@color/green"
-                    app:lb_btnText="Add/Update Pond"
-                    app:lb_cornerRadius="5"
-
+                     android:layout_marginEnd="25dp"
+                    app:lb_btnColor="@color/positive"
+                    app:lb_btnText="Save"
+                    style="@style/FormLabel.White"
+                    app:lb_cornerRadius="10"
                     />
 
             </RelativeLayout>

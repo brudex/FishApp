@@ -2,7 +2,7 @@ package com.inspierra.fishapp.HelpingClasses;
 
 public class SaveFishHealthRequestClass
 {
-    public String pondId;
+    public int pondId;
     public String waterQuality;
     public String waterPictureLink;
     public String colorOfWater;

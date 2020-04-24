@@ -4,22 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    tools:context=".Activities.MainActivity">
+    android:background="@drawable/register_bg"
+    >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/imgback">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/arrowb"
+            android:src="@drawable/arrowwhite"
             android:layout_marginStart="10dp"/>
 
         <TextView
+            android:id="@+id/tvBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
@@ -27,8 +28,21 @@
             android:text="Go Back"
             android:layout_marginTop="5dp"
             android:layout_marginStart="40dp"/>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/fish_logo"
+            android:scaleType="centerCrop"
+            android:id="@+id/imgfish"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignEnd="@id/tvBack"
+            />
+
 
     </RelativeLayout>
+
 
     <TextView
         android:id="@+id/txtfish"
@@ -37,24 +51,15 @@
         android:layout_centerHorizontal="true"
         android:text="Register"
         android:textColor="@color/white"
-        android:textSize="15sp"
-        android:layout_marginTop="100dp"
+         android:layout_marginTop="100dp"
+        style="@style/headerTitle"
         android:textStyle="bold"/>
-
-    <ImageView
-        android:id="@+id/imgfish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/fish3"
-        android:layout_below="@+id/txtfish"/>
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_below="@id/txtfish"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
         android:layout_centerInParent="true">
@@ -66,25 +71,23 @@
             <RelativeLayout
                 android:id="@+id/rel1"
                 android:layout_width="match_parent"
-                android:layout_height="80dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="50dp"
+                    style="@style/FormLabel.White"
                     android:gravity="center"
                     android:text="First Name"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                    />
 
                 <com.libizo.CustomEditText
                     android:id="@+id/txtfname"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="left|center"
@@ -103,13 +106,13 @@
                     app:libIZO_setCornerRadius="3dp"
                     app:libIZO_setPrefixTextColor="@color/black"
                     app:libIZO_setStrokeWidth="1dp" />
-
             </RelativeLayout>
 
+
             <RelativeLayout
-                android:id="@+id/rel2"
+                android:id="@+id/rel3"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel1">
 
                 <TextView
@@ -117,38 +120,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginBottom="50dp"
-                    android:gravity="center"
-                    android:text="Middle Name"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rel3"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_below="@+id/rel2">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginBottom="50dp"
-                    android:gravity="center"
-                    android:text="Last Name"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                     android:text="Last Name"
+                    style="@style/FormLabel.White"
+                    android:gravity="center" />
 
                 <com.libizo.CustomEditText
                     android:id="@+id/txtlname"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="left|center"
@@ -173,7 +154,7 @@
             <RelativeLayout
                 android:id="@+id/rel4"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel3">
 
                 <TextView
@@ -181,18 +162,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginBottom="50dp"
-                    android:gravity="center"
                     android:text="Farm Name"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                     style="@style/FormLabel.White"
+                    android:gravity="center"
+                    />
 
                 <com.libizo.CustomEditText
                     android:id="@+id/txtFarmname"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="left|center"
@@ -217,26 +197,24 @@
             <RelativeLayout
                 android:id="@+id/rel5"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel4">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="50dp"
-                    android:gravity="center"
+                     android:gravity="center"
+                    style="@style/FormLabel.White"
                     android:text="Phone Number"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                    />
 
                 <com.libizo.CustomEditText
                     android:id="@+id/txtPhone"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="left|center"
@@ -261,26 +239,25 @@
             <RelativeLayout
                 android:id="@+id/rel6"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel5">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/FormLabel.White"
+                    android:gravity="center"
                     android:layout_marginStart="25dp"
                     android:layout_marginBottom="50dp"
-                    android:gravity="center"
-                    android:text="Email Address"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                     android:text="Email Address"
+                     />
 
                 <com.libizo.CustomEditText
                     android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="left|center"
@@ -305,26 +282,24 @@
             <RelativeLayout
                 android:id="@+id/rel7"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel6">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="50dp"
+                    style="@style/FormLabel.White"
                     android:gravity="center"
                     android:text="Password"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                      />
 
                 <com.libizo.CustomEditText
                     android:id="@+id/txtPass"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="left|center"
@@ -349,26 +324,23 @@
             <RelativeLayout
                 android:id="@+id/rel8"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel7">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="50dp"
+                     style="@style/FormLabel.White"
                     android:gravity="center"
                     android:text="Confirm Password"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                    />
 
                 <com.libizo.CustomEditText
                     android:id="@+id/txtPassCon"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="left|center"
@@ -393,7 +365,7 @@
             <RelativeLayout
                 android:id="@+id/rel9"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel8">
 
                 <TextView
@@ -402,26 +374,23 @@
                     android:layout_marginStart="25dp"
                     android:layout_marginBottom="50dp"
                     android:gravity="center"
+                    style="@style/FormLabel.White"
                     android:text="Region"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                     />
 
                 <LinearLayout
                     android:id="@+id/txtregion"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="15dp"
-                    android:gravity="left|center"
+                    android:layout_marginTop="30dp"                    android:layout_marginEnd="25dp"
+                     android:gravity="left|center"
                     android:orientation="vertical"
                     android:background="#bfffffff">
 
                     <Spinner
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="50dp"
                         android:spinnerMode="dialog"
                         android:prompt="@string/Region"
                         android:id="@+id/spnRegions"
@@ -434,26 +403,24 @@
             <RelativeLayout
                 android:id="@+id/rel10"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel9">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="50dp"
-                    android:gravity="center"
+                     android:gravity="center"
                     android:text="Location"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                    style="@style/FormLabel.White"
+                   />
 
                 <com.libizo.CustomEditText
                     android:id="@+id/txtlocation"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginBottom="15dp"
                     android:gravity="left|center"
@@ -483,7 +450,8 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="25dp"
-                app:lb_btnColor="@color/green"
+                app:lb_btnColor="@color/label_color"
+                style="@style/FormLabel.White"
                 app:lb_btnText="Register"
                 app:lb_cornerRadius="5"
 

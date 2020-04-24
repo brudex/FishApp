@@ -5,50 +5,62 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/header_bg"
         android:layout_weight="0.8">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/fish4" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:layout_alignParentBottom="true"
-            android:text="Profile"
-            android:layout_marginStart="10dp"/>
-
         <RelativeLayout
+            android:id="@+id/imgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:id="@+id/relback">
+            android:layout_marginTop="30dp"
+            >
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/arrowblack"
+                android:src="@drawable/arrowwhite"
                 android:layout_marginStart="0dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="Go Back"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="30dp"/>
 
         </RelativeLayout>
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="10dp"
+            android:layout_marginTop="30dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fish_logo2"
+                android:layout_marginStart="0dp"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="60dp"
+            android:layout_below="@+id/imgback"
+            android:text="Edit Profile"
+            style="@style/headerTitle"
+            />
     </RelativeLayout>
 
     <LinearLayout
@@ -171,7 +183,6 @@
                         android:text="Last Name"
                         android:textColor="@color/black"
                         android:textSize="10dp" />
-
                     <com.libizo.CustomEditText
                         android:id="@+id/txtlname"
                         android:layout_width="match_parent"
@@ -196,7 +207,6 @@
                         app:libIZO_setCornerRadius="3dp"
                         app:libIZO_setPrefixTextColor="@color/black"
                         app:libIZO_setStrokeWidth="1dp" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -204,7 +214,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_below="@+id/rel3">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -214,7 +223,6 @@
                         android:text="Farm Name"
                         android:textColor="@color/black"
                         android:textSize="10dp" />
-
                     <com.libizo.CustomEditText
                         android:id="@+id/txtFarmname"
                         android:layout_width="match_parent"
@@ -239,7 +247,6 @@
                         app:libIZO_setCornerRadius="3dp"
                         app:libIZO_setPrefixTextColor="@color/black"
                         app:libIZO_setStrokeWidth="1dp" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -247,7 +254,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_below="@+id/rel4">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -257,7 +263,6 @@
                         android:text="Phone Number"
                         android:textColor="@color/black"
                         android:textSize="10dp" />
-
                     <com.libizo.CustomEditText
                         android:id="@+id/txtPhone"
                         android:layout_width="match_parent"
@@ -267,7 +272,7 @@
                         android:layout_marginEnd="25dp"
                         android:layout_marginBottom="15dp"
                         android:gravity="left|center"
-                        android:inputType="textPersonName"
+                        android:inputType="textPhonetic"
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textColorHint="@color/black"
@@ -282,7 +287,6 @@
                         app:libIZO_setCornerRadius="3dp"
                         app:libIZO_setPrefixTextColor="@color/black"
                         app:libIZO_setStrokeWidth="1dp" />
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -364,6 +368,7 @@
                             android:id="@+id/spnRegions"
                             android:entries="@array/regions"/>
 
+
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -429,7 +434,7 @@
                             android:textStyle="bold" />
 
                         <com.libizo.CustomEditText
-                            android:id="@+id/pondId"
+                            android:id="@+id/noOfPonds"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="25dp"
@@ -437,7 +442,7 @@
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -482,7 +487,7 @@
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -532,7 +537,7 @@
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -563,34 +568,17 @@
                         android:layout_height="80dp"
                         android:layout_weight="1">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+
+
+                        <Button
+                            android:id="@+id/btnSelectDate"
+                            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
-                            android:text="Next Market Date"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-                        <DatePicker
-                            android:id="@+id/marketDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
-                            android:inputType="textPersonName"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:typeface="sans"
-                            android:datePickerMode="calendar"/>
+                            android:enabled="true"
+                            android:text="Select Next Market Date" />
 
                     </RelativeLayout>
 

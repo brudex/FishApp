@@ -6,16 +6,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.inspierra.fishapp.R;
 
 public class MainActivity extends AppCompatActivity
 {
     LoadingButton btnRegister, btn_login;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -53,6 +50,7 @@ public class MainActivity extends AppCompatActivity
             //this.finish();
         });
 
-        //startActivity(new Intent(this,Hub.class));
-    }
+     }
+
+
 }

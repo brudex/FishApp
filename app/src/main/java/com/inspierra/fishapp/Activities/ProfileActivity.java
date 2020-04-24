@@ -6,15 +6,19 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.aminography.primecalendar.PrimeCalendar;
+import com.aminography.primecalendar.civil.CivilCalendar;
+import com.aminography.primedatepicker.PickType;
+import com.aminography.primedatepicker.fragment.PrimeDatePickerBottomSheet;
 import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.inspierra.fishapp.HelpingClasses.ProfileClass;
 import com.inspierra.fishapp.HelpingClasses.SaveProductionDataResponseClass;
@@ -23,11 +27,13 @@ import com.inspierra.fishapp.Utilities.AcquaApiClient;
 import com.inspierra.fishapp.Utilities.AcquahService;
 import com.inspierra.fishapp.Utilities.PrefsUtil;
 import com.libizo.CustomEditText;
-
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
 import java.util.Objects;
 
+import br.com.joinersa.oooalertdialog.Animation;
+import br.com.joinersa.oooalertdialog.OoOAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,13 +44,11 @@ public class ProfileActivity extends AppCompatActivity
             hatcheries;
     Spinner region;
     LoadingButton btnUpdate;
-    TextView txtFarmname;
-
     ProgressDialog progressDialog;
     AcquahService acquahService;
     ProfileClass profile;
-    DatePicker mktDate;
-    RelativeLayout relback;
+     RelativeLayout relback;
+    Button btnSelectDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -54,11 +58,7 @@ public class ProfileActivity extends AppCompatActivity
         profile = new ProfileClass();
 
         acquahService = AcquaApiClient.getClient().create(AcquahService.class);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please Wait..."); // Setting Message
-        progressDialog.setTitle("Processing"); // Setting Title
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-        progressDialog.setCancelable(false);
+
 
         if (Build.VERSION.SDK_INT < 21)
         {
@@ -80,9 +80,9 @@ public class ProfileActivity extends AppCompatActivity
             getWindow().setStatusBarColor(Color.TRANSPARENT);*/
         }
 
-        relback = findViewById(R.id.relback);
+        relback = findViewById(R.id.imgBack);
         relback.setOnClickListener(v -> onBackPressed());
-        mktDate = findViewById(R.id.marketDate);
+        btnSelectDate = findViewById(R.id.btnSelectDate);
         txtfname = findViewById(R.id.txtfname);
         txtlname = findViewById(R.id.txtlname);
         txtmname = findViewById(R.id.txtmname);
@@ -96,8 +96,27 @@ public class ProfileActivity extends AppCompatActivity
         btnUpdate = findViewById(R.id.btnUpdate);
         hatcheries = findViewById(R.id.hatchery);
         cages = findViewById(R.id.cages);
+        ponds = findViewById(R.id.noOfPonds);
+        CivilCalendar calendar = new CivilCalendar(Locale.ENGLISH);
+        CivilCalendar calendar1 =new CivilCalendar(Locale.ENGLISH);
+        calendar1.setYear(2015);
+        calendar1.setDayOfMonth(1);
+        calendar1.setMonth(1);
+        PrimeDatePickerBottomSheet datePicker = PrimeDatePickerBottomSheet.newInstance(calendar,calendar1, PickType.SINGLE);
 
-
+        btnSelectDate.setOnClickListener(v -> {
+            datePicker.show(getSupportFragmentManager(), "SOME_TAG");
+        });
+        datePicker.setOnDateSetListener(new PrimeDatePickerBottomSheet.OnDayPickedListener() {
+            @Override
+            public void onSingleDayPicked(@NotNull PrimeCalendar singleDay) {
+                 profile.nextMarketDate =singleDay.getShortDateString();
+            }
+            @Override
+            public void onRangeDaysPicked(@NotNull PrimeCalendar startDay, @NotNull PrimeCalendar endDay) {
+                // TODO
+            }
+        });
         btnUpdate.setOnClickListener(v -> {
             profile.email = Objects.requireNonNull(txtemail.getText()).toString().trim();
             profile.middleName = Objects.requireNonNull(txtmname.getText()).toString().trim();
@@ -108,13 +127,23 @@ public class ProfileActivity extends AppCompatActivity
             profile.noOfCages = Integer.parseInt(Objects.requireNonNull(cages.getText()).toString().trim());
             profile.noOfHatcheries = Integer.parseInt(Objects.requireNonNull(hatcheries.getText()).toString().trim());
             profile.noOfPonds = Integer.parseInt(Objects.requireNonNull(ponds.getText()).toString().trim());
-
-            progressDialog.show();
+            getProgressDialog().show();
             new updateProfilr().execute();
         });
 
-        progressDialog.show();
+        getProgressDialog().show();
         new getDetails().execute();
+    }
+
+    private ProgressDialog getProgressDialog() {
+        if(progressDialog==null){
+            progressDialog = new ProgressDialog(this);
+        }
+        progressDialog.setMessage("Please Wait..."); // Setting Message
+        progressDialog.setTitle("Processing"); // Setting Title
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+        progressDialog.setCancelable(false);
+        return progressDialog;
     }
 
 
@@ -162,7 +191,6 @@ public class ProfileActivity extends AppCompatActivity
                         String error = ex.getMessage();
                     }
                 }
-
                 @Override
                 public void onFailure(@NotNull Call<ProfileClass> call, @NotNull Throwable t)
                 {
@@ -191,8 +219,16 @@ public class ProfileActivity extends AppCompatActivity
                     assert response.body() != null;
                     if (response.body().status.equals("00"))
                     {
-                        Toast.makeText(ProfileActivity.this, "Profile Updated Successfully",
-                                Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(ProfileActivity.this, "Profile Updated Successfully",
+//                                Toast.LENGTH_SHORT).show();
+                        new OoOAlertDialog.Builder(ProfileActivity.this)
+                                .setTitle("Success")
+                                .setMessage("Profile Updated Successfully")
+                                .setAnimation(Animation.POP)
+                                .setPositiveButton("Ok", null)
+                                .setPositiveButtonColor(R.color.green)
+                                .build();
+                        progressDialog.dismiss();
                     }
                     else
                     {

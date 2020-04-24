@@ -1,92 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/mainContainer">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@drawable/header_bg"
+        android:layout_weight="0.8">
+
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.8">
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="20dp"
+            android:id="@+id/relRecord">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/fish4" />
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/mic_shape"
+                android:id="@+id/mic"
+                android:layout_centerInParent="true"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="Fish Health and Water Quality"
+                android:text="Record"
                 android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/mic"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"/>
 
-            <RelativeLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="20dp"
-                android:id="@+id/relRecord">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/mic_shape"
-                    android:id="@+id/mic"
-                    android:layout_centerInParent="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="10dp"
-                    android:text="Record"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:layout_below="@+id/mic"
-                    android:layout_marginTop="5dp"
-                    android:layout_centerHorizontal="true"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:id="@+id/relback">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/arrowblack"
-                    android:layout_marginStart="0dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:text="Go Back"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="30dp"/>
-
-            </RelativeLayout>
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/relBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/arrowwhite"
+                android:layout_marginStart="0dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:text="Go Back"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"/>
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="60dp"
+            android:text="Fish Health Form"
+            android:layout_below="@id/relBack"
+            style="@style/headerTitle2"
+            />
+
+    </RelativeLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -94,18 +86,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="0.3">
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <TextView
                     android:id="@+id/txtqqqq"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="22dp"
-                    android:text="Fish Health and Water Quality"
-                    android:textSize="15sp" />
+                     android:textSize="15sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -114,10 +103,49 @@
                     android:layout_marginTop="10dp">
 
                     <RelativeLayout
-                        android:id="@+id/rel4"
+                        android:id="@+id/relMortality"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_below="@+id/rel3">
+                        android:layout_height="wrap_content"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:gravity="center"
+                            android:text="Mortality"
+                           style="@style/FormLabel.Gray" />
+
+                        <com.libizo.CustomEditText
+                            android:id="@+id/mortality"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="25dp"
+                             android:gravity="left|center"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:typeface="sans"
+                            app:libIZO_clearIconTint="@color/black"
+                            app:libIZO_setBackgroundColor="#bfffffff"
+                            app:libIZO_setBorderColor="@color/greylight"
+                            app:libIZO_setBorderView="true"
+                            app:libIZO_setClearIconVisible="true"
+                            app:libIZO_setCornerRadius="3dp"
+                            app:libIZO_setPrefixTextColor="@color/black"
+                            app:libIZO_setStrokeWidth="1dp" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/relPhLevel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relMortality">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -125,21 +153,56 @@
                             android:layout_marginStart="25dp"
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
-                            android:text="Mortality"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            android:text="Ph Level"
+                            style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
-                            android:id="@+id/mortality"
+                            android:id="@+id/phLevel"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
+                             android:gravity="left|center"
+                            android:inputType="numberDecimal"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:typeface="sans"
+                            app:libIZO_clearIconTint="@color/black"
+                            app:libIZO_setBackgroundColor="#bfffffff"
+                            app:libIZO_setBorderColor="@color/greylight"
+                            app:libIZO_setBorderView="true"
+                            app:libIZO_setClearIconVisible="true"
+                            app:libIZO_setCornerRadius="3dp"
+                            app:libIZO_setPrefixTextColor="@color/black"
+                            app:libIZO_setStrokeWidth="1dp" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/relColorOfWater"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relPhLevel">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginBottom="50dp"
+                            android:gravity="center"
+                            android:text="Color of Water"
+                            style="@style/FormLabel.Gray"/>
+                        <com.libizo.CustomEditText
+                            android:id="@+id/colorOfWater"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="25dp"
                             android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="text"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -157,102 +220,11 @@
 
                     </RelativeLayout>
 
-                    <LinearLayout
-                        android:id="@+id/rel1"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginBottom="50dp"
-                                android:gravity="center"
-                                android:text="Ph Level"
-                                android:textColor="@color/grey"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-
-                            <com.libizo.CustomEditText
-                                android:id="@+id/phLevel"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="25dp"
-                                android:layout_marginBottom="15dp"
-                                android:gravity="left|center"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:typeface="sans"
-                                app:libIZO_clearIconTint="@color/black"
-                                app:libIZO_setBackgroundColor="#bfffffff"
-                                app:libIZO_setBorderColor="@color/greylight"
-                                app:libIZO_setBorderView="true"
-                                app:libIZO_setClearIconVisible="true"
-                                app:libIZO_setCornerRadius="3dp"
-                                app:libIZO_setPrefixTextColor="@color/black"
-                                app:libIZO_setStrokeWidth="1dp" />
-
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_weight="1">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginBottom="50dp"
-                                android:gravity="center"
-                                android:text="Color of Water"
-                                android:textColor="@color/grey"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-
-                            <com.libizo.CustomEditText
-                                android:id="@+id/colorOfWater"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="25dp"
-                                android:layout_marginBottom="15dp"
-                                android:gravity="left|center"
-                                android:inputType="textPersonName"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:typeface="sans"
-                                app:libIZO_clearIconTint="@color/black"
-                                app:libIZO_setBackgroundColor="#bfffffff"
-                                app:libIZO_setBorderColor="@color/greylight"
-                                app:libIZO_setBorderView="true"
-                                app:libIZO_setClearIconVisible="true"
-                                app:libIZO_setCornerRadius="3dp"
-                                app:libIZO_setPrefixTextColor="@color/black"
-                                app:libIZO_setStrokeWidth="1dp" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
                     <RelativeLayout
-                        android:id="@+id/rel2"
+                        android:id="@+id/relWaterPicture"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_below="@+id/rel1">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relColorOfWater">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -261,30 +233,54 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Water Picture"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"/>
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:src="@drawable/camera"
                             android:scaleType="fitCenter"
                             android:foregroundGravity="center"
                             android:background="@color/greylight"
                             android:layout_marginStart="25dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginBottom="25dp"
+                            android:layout_marginTop="30dp"
                             android:id="@+id/waterPicture"/>
 
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/rel3"
+                        android:id="@+id/relFishDisease"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_below="@+id/rel2">
+                        android:layout_height="100dp"
+                        android:layout_below="@+id/relWaterPicture">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                             android:gravity="center"
+                            android:text="Fish Disease Picture"
+                            style="@style/FormLabel.Gray"/>
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:src="@drawable/camera"
+                            android:scaleType="fitCenter"
+                            android:foregroundGravity="center"
+                            android:background="@color/greylight"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginEnd="25dp"
+                            android:layout_marginTop="30dp"
+                             android:id="@+id/FishDisease"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/relOxygen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relFishDisease">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -292,285 +288,213 @@
                             android:layout_marginStart="25dp"
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
-                            android:text="Fish Disease Picture"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            android:text="Oxygen"
+                            style="@style/FormLabel.Gray"/>
+                        <com.libizo.CustomEditText
+                            android:id="@+id/Oxygen"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="25dp"
+                             android:gravity="left|center"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:typeface="sans"
+                            app:libIZO_clearIconTint="@color/black"
+                            app:libIZO_setBackgroundColor="#bfffffff"
+                            app:libIZO_setBorderColor="@color/greylight"
+                            app:libIZO_setBorderView="true"
+                            app:libIZO_setClearIconVisible="true"
+                            app:libIZO_setCornerRadius="3dp"
+                            app:libIZO_setPrefixTextColor="@color/black"
+                            app:libIZO_setStrokeWidth="1dp" />
 
-                        <ImageView
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relTemperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/relOxygen"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                             android:gravity="center"
+                            android:text="Temparature °C"
+                            style="@style/FormLabel.Gray" />
+
+                        <com.libizo.CustomEditText
+                            android:id="@+id/Temperature"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="25dp"
+                             android:gravity="left|center"
+                            android:inputType="numberDecimal"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:typeface="sans"
+                            app:libIZO_clearIconTint="@color/black"
+                            app:libIZO_setBackgroundColor="#bfffffff"
+                            app:libIZO_setBorderColor="@color/greylight"
+                            app:libIZO_setBorderView="true"
+                            app:libIZO_setClearIconVisible="true"
+                            app:libIZO_setCornerRadius="3dp"
+                            app:libIZO_setPrefixTextColor="@color/black"
+                            app:libIZO_setStrokeWidth="1dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relTemperature"
+                        android:id="@+id/relNitrite">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginBottom="50dp"
+                            android:gravity="center"
+                            android:text="Nitrite"
+                            style="@style/FormLabel.Gray"/>
+                        <com.libizo.CustomEditText
+                            android:id="@+id/Nitrite"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/camera"
-                            android:scaleType="fitCenter"
-                            android:foregroundGravity="center"
-                            android:background="@color/greylight"
                             android:layout_marginStart="25dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginBottom="25dp"
-                            android:id="@+id/FishDisease"/>
+                            android:layout_marginBottom="15dp"
+                            android:inputType="numberDecimal"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:typeface="sans"
+                            app:libIZO_clearIconTint="@color/black"
+                            app:libIZO_setBackgroundColor="#bfffffff"
+                            app:libIZO_setBorderColor="@color/greylight"
+                            app:libIZO_setBorderView="true"
+                            app:libIZO_setClearIconVisible="true"
+                            app:libIZO_setCornerRadius="3dp"
+                            app:libIZO_setPrefixTextColor="@color/black"
+                            app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
 
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relNitrite"
+                        android:id="@+id/relAmmonia">
 
-                    <LinearLayout
-                        android:id="@+id/rel5"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginBottom="50dp"
+                            android:gravity="center"
+                            android:text="Ammonia"
+                            style="@style/FormLabel.Gray" />
+
+                        <com.libizo.CustomEditText
+                            android:id="@+id/Ammonia"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="25dp"
+                             android:gravity="left|center"
+                            android:inputType="numberDecimal"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:typeface="sans"
+                            app:libIZO_clearIconTint="@color/black"
+                            app:libIZO_setBackgroundColor="#bfffffff"
+                            app:libIZO_setBorderColor="@color/greylight"
+                            app:libIZO_setBorderView="true"
+                            app:libIZO_setClearIconVisible="true"
+                            app:libIZO_setCornerRadius="3dp"
+                            app:libIZO_setPrefixTextColor="@color/black"
+                            app:libIZO_setStrokeWidth="1dp" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_below="@+id/rel4">
+                        android:layout_below="@+id/relAmmonia"
+                        android:id="@+id/relTurbidity">
 
-                        <RelativeLayout
+                        <TextView
+                            android:id="@+id/ggg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:gravity="center"
+                            android:text="Turbidity"
+                            style="@style/FormLabel.Gray" />
+
+                        <com.libizo.CustomEditText
+                            android:id="@+id/Turbidity"
                             android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_weight="1">
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginEnd="25dp"
+                             android:gravity="left|center"
+                            android:inputType="numberDecimal"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:typeface="sans"
+                            app:libIZO_clearIconTint="@color/black"
+                            app:libIZO_setBackgroundColor="#bfffffff"
+                            app:libIZO_setBorderColor="@color/greylight"
+                            app:libIZO_setBorderView="true"
+                            app:libIZO_setClearIconVisible="true"
+                            app:libIZO_setCornerRadius="3dp"
+                            app:libIZO_setPrefixTextColor="@color/black"
+                            app:libIZO_setStrokeWidth="1dp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginBottom="50dp"
-                                android:gravity="center"
-                                android:text="Oxygen"
-                                android:textColor="@color/grey"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-
-                            <com.libizo.CustomEditText
-                                android:id="@+id/Oxygen"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="25dp"
-                                android:layout_marginBottom="15dp"
-                                android:gravity="left|center"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:typeface="sans"
-                                app:libIZO_clearIconTint="@color/black"
-                                app:libIZO_setBackgroundColor="#bfffffff"
-                                app:libIZO_setBorderColor="@color/greylight"
-                                app:libIZO_setBorderView="true"
-                                app:libIZO_setClearIconVisible="true"
-                                app:libIZO_setCornerRadius="3dp"
-                                app:libIZO_setPrefixTextColor="@color/black"
-                                app:libIZO_setStrokeWidth="1dp" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="50dp"
-                                android:gravity="center"
-                                android:text="Temparature °C"
-                                android:textColor="@color/grey"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-
-                            <com.libizo.CustomEditText
-                                android:id="@+id/Temperature"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="25dp"
-                                android:layout_marginBottom="15dp"
-                                android:gravity="left|center"
-                                android:inputType="textPersonName"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:typeface="sans"
-                                app:libIZO_clearIconTint="@color/black"
-                                app:libIZO_setBackgroundColor="#bfffffff"
-                                app:libIZO_setBorderColor="@color/greylight"
-                                app:libIZO_setBorderView="true"
-                                app:libIZO_setClearIconVisible="true"
-                                app:libIZO_setCornerRadius="3dp"
-                                app:libIZO_setPrefixTextColor="@color/black"
-                                app:libIZO_setStrokeWidth="1dp" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/rel6"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_below="@+id/rel5">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginBottom="50dp"
-                                android:gravity="center"
-                                android:text="Ammonia"
-                                android:textColor="@color/grey"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-
-                            <com.libizo.CustomEditText
-                                android:id="@+id/Ammonia"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="25dp"
-                                android:layout_marginBottom="15dp"
-                                android:gravity="left|center"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:typeface="sans"
-                                app:libIZO_clearIconTint="@color/black"
-                                app:libIZO_setBackgroundColor="#bfffffff"
-                                app:libIZO_setBorderColor="@color/greylight"
-                                app:libIZO_setBorderView="true"
-                                app:libIZO_setClearIconVisible="true"
-                                app:libIZO_setCornerRadius="3dp"
-                                app:libIZO_setPrefixTextColor="@color/black"
-                                app:libIZO_setStrokeWidth="1dp" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginBottom="50dp"
-                                android:gravity="center"
-                                android:text="Nitrite"
-                                android:textColor="@color/grey"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-
-                            <com.libizo.CustomEditText
-                                android:id="@+id/Nitrite"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="25dp"
-                                android:layout_marginBottom="15dp"
-                                android:gravity="left|center"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:typeface="sans"
-                                app:libIZO_clearIconTint="@color/black"
-                                app:libIZO_setBackgroundColor="#bfffffff"
-                                app:libIZO_setBorderColor="@color/greylight"
-                                app:libIZO_setBorderView="true"
-                                app:libIZO_setClearIconVisible="true"
-                                app:libIZO_setCornerRadius="3dp"
-                                app:libIZO_setPrefixTextColor="@color/black"
-                                app:libIZO_setStrokeWidth="1dp" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/rel7"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_below="@+id/rel6">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/ggg"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginBottom="50dp"
-                                android:gravity="center"
-                                android:text="Turbidity"
-                                android:textColor="@color/grey"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-
-                            <com.libizo.CustomEditText
-                                android:id="@+id/Turbidity"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="25dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="25dp"
-                                android:layout_marginBottom="15dp"
-                                android:gravity="left|center"
-                                android:inputType="number"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:typeface="sans"
-                                app:libIZO_clearIconTint="@color/black"
-                                app:libIZO_setBackgroundColor="#bfffffff"
-                                app:libIZO_setBorderColor="@color/greylight"
-                                app:libIZO_setBorderView="true"
-                                app:libIZO_setClearIconVisible="true"
-                                app:libIZO_setCornerRadius="3dp"
-                                app:libIZO_setPrefixTextColor="@color/black"
-                                app:libIZO_setStrokeWidth="1dp" />
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
+                    </RelativeLayout>
 
                     <com.dx.dxloadingbutton.lib.LoadingButton
                         android:id="@+id/btnSubmit"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:layout_below="@+id/rel7"
+                        android:layout_below="@+id/relTurbidity"
                         android:layout_marginStart="25dp"
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="25dp"
-                        app:lb_btnColor="@color/green"
-                        app:lb_btnText="Add Pond"
+                        app:lb_btnColor="@color/positive"
+                        app:lb_btnText="Save"
                         app:lb_cornerRadius="5"
-
                         />
 
                 </RelativeLayout>
 
             </RelativeLayout>
-
         </ScrollView>
-    </LinearLayout>
 
-</FrameLayout>
+
+</LinearLayout>

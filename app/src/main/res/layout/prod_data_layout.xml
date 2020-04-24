@@ -5,85 +5,94 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.8">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/fish4"
-            android:scaleType="center"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
-            android:text="Production Data"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
+        android:layout_height="wrap_content"
+        android:background="@drawable/header_bg"
+        android:layout_weight="0.8"
+        >
         <RelativeLayout
-            android:id="@+id/relRecord"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="20dp">
+            android:layout_marginEnd="20dp"
+            android:id="@+id/relRecord">
 
             <ImageView
-                android:id="@+id/mic"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/mic_shape" />
+                android:src="@drawable/mic_shape"
+                android:id="@+id/mic"
+                android:layout_centerInParent="true"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/mic"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
                 android:text="Record"
                 android:textColor="@color/white"
                 android:textSize="10sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_below="@+id/mic"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/imgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:id="@+id/relback">
+            android:layout_marginTop="20dp"
+            >
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/arrowblack"
+                android:src="@drawable/arrowwhite"
                 android:layout_marginStart="0dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="Go Back"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="30dp"/>
 
         </RelativeLayout>
-
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="10dp"
+            android:layout_marginTop="20dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fish_logo2"
+                android:layout_marginStart="0dp"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="80dp"
+            android:layout_below="@+id/imgBack"
+            android:id="@+id/tvTitle"
+            android:text="Production Data Form"
+            style="@style/headerTitle"
+            />
     </RelativeLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -97,13 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/txtqqqq"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:text="Production"
-                android:textSize="15sp" />
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -111,85 +114,30 @@
                 android:layout_below="@+id/txtqqqq"
                 android:layout_marginTop="10dp">
 
-                <LinearLayout
-                    android:id="@+id/rel1"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_weight="1"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
-                            android:text="Pond Id"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-                        <com.libizo.CustomEditText
-                            android:id="@+id/PondID"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
-                            android:inputType="textPersonName"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:typeface="sans"
-                            app:libIZO_clearIconTint="@color/black"
-                            app:libIZO_setBackgroundColor="#bfffffff"
-                            app:libIZO_setBorderColor="@color/greylight"
-                            app:libIZO_setBorderView="true"
-                            app:libIZO_setClearIconVisible="true"
-                            app:libIZO_setCornerRadius="3dp"
-                            app:libIZO_setPrefixTextColor="@color/black"
-                            app:libIZO_setStrokeWidth="1dp" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
                 <RelativeLayout android:id="@+id/relPondCages"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_below="@+id/rel1">
+                    android:layout_height="match_parent"
+                     >
                     <RelativeLayout
                         android:id="@+id/rel1_1"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Quantity of Fish"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"/>
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtQuantityOfFish"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
@@ -211,8 +159,9 @@
 
                     </RelativeLayout>
                     <RelativeLayout
-                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:id="@+id/relDateOfStocking"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/rel1_1">
 
                         <TextView
@@ -222,16 +171,15 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Date of Stocking of Fish"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"
+                             />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtDateOfStocking"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
@@ -252,32 +200,28 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
-                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_below="@+id/rel1_1">
+                        android:id="@+id/relFishSize"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relDateOfStocking">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
+                             android:gravity="center"
                             android:text="Size of Fish"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtFishSize"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -295,10 +239,11 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
+                        android:id="@+id/relSourceOfFeed"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relFishSize"
                         >
 
                         <TextView
@@ -308,19 +253,16 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Source of feed"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"/>
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtSourceOfFeed"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -338,45 +280,39 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
-                        android:id="@+id/rel3"
+                        android:id="@+id/relQuantityOfFeed"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_below="@+id/rel2">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relSourceOfFeed">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
+                             android:gravity="center"
                             android:text="Quantity OF Feed per day in bags"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
-
+                            style="@style/FormLabel.Gray"/>
 
                         <Spinner
                             android:id="@+id/spnFeed"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="10dp"
-                            android:entries="@array/feed"
-                            android:backgroundTint="@color/greylight"
+                             android:entries="@array/feed"
+                            android:background="@drawable/spinner_background"
                             android:spinnerMode="dialog"
                             />
 
                     </RelativeLayout>
-
                     <RelativeLayout
+                        android:id="@+id/relHarvestDate"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                         >
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relQuantityOfFeed"
+                        >
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -385,20 +321,17 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Harvest Date"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"/>
 
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtHarvestDate"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -417,10 +350,11 @@
 
 
                     </RelativeLayout>
-
                     <RelativeLayout
+                        android:id="@+id/relQuantityHarvested"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relHarvestDate"
                         >
 
                         <TextView
@@ -430,20 +364,17 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Quantity of Fish Harvested"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"/>
 
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtQuantityHarvested"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -462,11 +393,11 @@
 
 
                     </RelativeLayout>
-
-
                     <RelativeLayout
+                        android:id="@+id/relWeightOfFishHarvested"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relQuantityHarvested"
                         >
 
                         <TextView
@@ -476,20 +407,17 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Weight of Fish Harvested"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray" />
 
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtWeightOfFishHarvested"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -508,10 +436,11 @@
 
 
                     </RelativeLayout>
-
                     <RelativeLayout
+                        android:id="@+id/relPriceOfFishPerKg"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relWeightOfFishHarvested"
                         >
 
                         <TextView
@@ -520,10 +449,8 @@
                             android:layout_marginStart="25dp"
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
-                            android:text="Price of Fish Per Kg "
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            android:text="Price of Fish Per Kg"
+                            style="@style/FormLabel.Gray"/>
 
 
                         <com.libizo.CustomEditText
@@ -531,7 +458,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
@@ -553,24 +480,17 @@
 
 
                     </RelativeLayout>
-
-
                 </RelativeLayout>
-
-
 
 
                 <RelativeLayout android:id="@+id/relHatcheries"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/relPondCages">
-
-
                     <RelativeLayout
                         android:id="@+id/relIncubatedEggs"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp">
-
+                        android:layout_height="wrap_content">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -578,16 +498,13 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Incubated Eggs"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
-
+                           style="@style/FormLabel.Gray" />
                         <com.libizo.CustomEditText
                             android:id="@+id/txtIncubatedEggs"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
@@ -606,13 +523,13 @@
                             app:libIZO_setCornerRadius="3dp"
                             app:libIZO_setPrefixTextColor="@color/black"
                             app:libIZO_setStrokeWidth="1dp" />
-
                     </RelativeLayout>
                     <RelativeLayout
-                        android:id="@+id/rel4"
+                        android:id="@+id/relEggsHatched"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp">
-
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relIncubatedEggs"
+                        >
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -620,19 +537,16 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Hatched Eggs"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtEggsHatched"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -650,12 +564,11 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
-                        android:id="@+id/rel5"
+                        android:id="@+id/relIncubationDuration"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_below="@+id/rel4">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relEggsHatched">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -664,19 +577,16 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Incubation Duration"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"/>
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtIncubationDuration"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -694,12 +604,11 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/relFriesStocked"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_below="@+id/rel5">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/relIncubationDuration">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -708,19 +617,16 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="No. of Fries Stocked"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"/>
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtNoOfFriesStocked"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -738,33 +644,28 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/relNoFriesRecovered"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/relFriesStocked">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
+                             android:gravity="center"
                             android:text="No. of Fries Recovered"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtNoOfFriesRecovered"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -782,11 +683,10 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/relSexReversalDuration"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/relNoFriesRecovered">
 
                         <TextView
@@ -796,19 +696,16 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Sex Reversal Duration"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtSexReversalDuration"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -826,30 +723,25 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/relAvgOfStocking"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/relSexReversalDuration">
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
+                             android:gravity="center"
                             android:text="Avg Weight of Stocking"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtAvgWeightOfStocking"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
@@ -870,11 +762,10 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/relWeightReversal"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/relAvgOfStocking">
 
                         <TextView
@@ -884,19 +775,16 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Avg Weight Reversal"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"/>
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtWeightReversal"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -914,7 +802,6 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/relNoOfFriesNursery"
                         android:layout_width="match_parent"
@@ -925,22 +812,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
+                             android:gravity="center"
                             android:text="No Fries Stocked During Nursery"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray"/>
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtNoOfFriesNursery"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -958,12 +841,11 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/relStockingRecovered"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_below="@+id/rel8">
+                        android:layout_below="@+id/relNoOfFriesNursery">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -972,19 +854,16 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="No Fries Stocking Recovered"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtStockingRecovered"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -1002,11 +881,10 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/relNurseryDuration"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/relStockingRecovered">
 
                         <TextView
@@ -1016,19 +894,16 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Nursery Duration"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtNurseryDuration"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -1046,7 +921,6 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/relAvgFinalWeight"
                         android:layout_width="match_parent"
@@ -1060,19 +934,16 @@
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
                             android:text="Final Average Weight"
-                            android:textColor="@color/grey"
-                            android:textSize="10dp"
-                            android:textStyle="bold" />
+                            style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtFinalAvgWeight"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="25dp"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:gravity="left|center"
+                             android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
                             android:textColor="@color/black"
@@ -1090,23 +961,19 @@
                             app:libIZO_setStrokeWidth="1dp" />
 
                     </RelativeLayout>
-
-                    <com.dx.dxloadingbutton.lib.LoadingButton
-                        android:id="@+id/btnSubmit"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_below="@+id/relAvgFinalWeight"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="25dp"
-                        app:lb_btnColor="@color/green"
-                        app:lb_btnText="Update Data"
-                        app:lb_cornerRadius="5" />
-
-
                 </RelativeLayout>
 
-
+                <com.dx.dxloadingbutton.lib.LoadingButton
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/relHatcheries"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="25dp"
+                    app:lb_btnColor="@color/positive"
+                    app:lb_btnText="Save"
+                    app:lb_cornerRadius="5" />
 
             </RelativeLayout>
 

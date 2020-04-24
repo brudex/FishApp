@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFEFF"
-    tools:context=".Activities.MainActivity">
+     android:background="@drawable/loginbg">
 
     <TextView
         android:id="@+id/txtfish"
@@ -16,38 +15,25 @@
         android:textColor="@color/white"
         android:textSize="12sp" />
 
-    <ImageView
-        android:id="@+id/imgfish"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_below="@+id/txtfish"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/fish4" />
-
     <RelativeLayout
         android:id="@+id/imgback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp">
-
+        android:layout_marginTop="30dp">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/arrowblack" />
-
+            android:src="@drawable/arrowwhite" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="5dp"
             android:text="Go Back"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15sp" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -57,35 +43,55 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp">
 
+        <ImageView
+
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/fish_logo"
+            android:scaleType="centerCrop"
+            android:id="@+id/imgfish"
+            android:layout_marginTop="60dp"
+            android:layout_centerHorizontal="true"
+
+            />
+        <TextView
+            android:id="@+id/txtLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:layout_below="@+id/imgfish"
+             style="@style/headerTitle"
+             />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/txtLogin"
             android:layout_centerInParent="true">
 
             <RelativeLayout
                 android:id="@+id/rel1"
                 android:layout_width="match_parent"
-                android:layout_height="80dp">
-
+                android:layout_height="wrap_content">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="50dp"
                     android:gravity="center"
                     android:text="Phone/Email"
-                    android:textColor="#032A43"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
+                    style="@style/FormLabel.White"
+                    />
                 <com.libizo.CustomEditText
                     android:id="@+id/txtfname"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:gravity="left|center"
                     android:inputType="textPersonName"
                     android:singleLine="true"
@@ -108,29 +114,26 @@
             <RelativeLayout
                 android:id="@+id/rel2"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_marginBottom="50dp"
                     android:gravity="center"
                     android:text="Password"
-                    android:textColor="#032A43"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    style="@style/FormLabel.White"
+                    />
 
                 <com.libizo.CustomEditText
                     android:id="@+id/txtmname"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginStart="25dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="15dp"
-                    android:gravity="left|center"
+                     android:layout_marginEnd="25dp"
+                     android:gravity="left|center"
                     android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColor="@color/black"
@@ -155,15 +158,35 @@
                 android:layout_height="60dp"
                 android:layout_below="@+id/rel2"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
-                app:lb_btnColor="@color/green"
+                app:lb_btnColor="@color/positive"
+                style="@style/FormLabel.White"
+                android:textStyle="bold"
                 app:lb_btnText="Login"
-                app:lb_cornerRadius="5"
-
+                app:lb_cornerRadius="10"
                 />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/btnSubmit">
+
+                <TextView
+                    android:id="@+id/tvForgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginBottom="50dp"
+                    android:gravity="center"
+                    style="@style/FormLabel.BlueBlack"
+                    android:text="Forgot Password"
+                    android:textColor="#084981"
+                    />
+
+            </RelativeLayout>
 
         </RelativeLayout>
+
 
     </RelativeLayout>
 

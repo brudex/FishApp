@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -34,8 +35,13 @@ import com.inspierra.fishapp.Utilities.AcquaApiClient;
 import com.inspierra.fishapp.Utilities.AcquahService;
 import com.inspierra.fishapp.Utilities.PrefsUtil;
 import com.libizo.CustomEditText;
+import com.raywenderlich.android.validatetor.ValidateTor;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
 import cafe.adriel.androidaudiorecorder.model.AudioChannel;
@@ -56,23 +62,23 @@ public class ProductionDataActivity extends AppCompatActivity
     ProgressDialog progressDialog;
     AcquahService acquahService;
     SaveProductionDataRequestClass requestClass;
-    CustomEditText PondID, txtQuantityOfFish, txtDateOfStocking,txtFishSize,txtSourceOfFeed,txtHarvestDate,
+    CustomEditText  txtQuantityOfFish, txtDateOfStocking,txtFishSize,txtSourceOfFeed,txtHarvestDate,
     txtQuantityHarvested,txtWeightOfFishHarvested,txtPriceOfFishPerKg,
     txtIncubatedEggs,txtEggsHatched,txtIncubationDuration,txtNoOfFriesStocked,txtNoOfFriesRecovered,txtSexReversalDuration,txtAvgWeightOfStocking,
             txtWeightReversal,txtNoOfFriesNursery,txtStockingRecovered,txtNurseryDuration,txtFinalAvgWeight;
-
-
 
     LoadingButton btnSubmit;
     UserPondsClass pond;
     ImageView FishDisease;
     boolean pondMode;
-    RelativeLayout relRecord,relback;
+    RelativeLayout relRecord,relBack;
     String filePath;
     Spinner qtyFeed;
     int color;
     int requestCode = 0;
-    String[] feedlist;
+     String[] feedlist;
+    ValidateTor validateTor = new ValidateTor();
+    List<String> validationErrors;
 
 
     @Override
@@ -80,14 +86,15 @@ public class ProductionDataActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.prod_data_layout);
-
+        validationErrors=new ArrayList<>();
         Intent intent = getIntent();
         filePath = Environment.getExternalStorageDirectory() + "/recorded_audio.wav";
         color = getResources().getColor(R.color.blueGray200);
-
-        pond = new Gson().fromJson(intent.getStringExtra("pond"), UserPondsClass.class);
-        ActivityCompat.requestPermissions(this,
-                new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO, READ_EXTERNAL_STORAGE}, 0);
+        String pondJson = intent.getStringExtra("pond");
+        pond = new Gson().fromJson(pondJson, UserPondsClass.class);
+        Log.d("ProductionData",pondJson);
+//        ActivityCompat.requestPermissions(this,
+//                new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO, READ_EXTERNAL_STORAGE}, 0);
         //ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, 0);
 
         acquahService = AcquaApiClient.getClient().create(AcquahService.class);
@@ -100,8 +107,6 @@ public class ProductionDataActivity extends AppCompatActivity
         {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-          /* setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);*/
 
         }
 
@@ -111,8 +116,7 @@ public class ProductionDataActivity extends AppCompatActivity
             {
                 requestClass = new SaveProductionDataRequestClass();
                 requestClass.pondId = pond.pondId;
-                //progressDialog.show();
-                //new getProductionData().execute();
+
             }
         }
         catch (Exception ex)
@@ -123,20 +127,20 @@ public class ProductionDataActivity extends AppCompatActivity
         relPondCages = findViewById(R.id.relPondCages);
         relHatcheries = findViewById(R.id.relHatcheries);
         qtyFeed = findViewById(R.id.spnFeed);
-        relback = findViewById(R.id.relback);
-        relback.setOnClickListener(v -> onBackPressed());
+        relBack = findViewById(R.id.imgBack);
+
         relRecord = findViewById(R.id.relRecord);
-        PondID = findViewById(R.id.PondID);
+        //PondID = findViewById(R.id.PondID);
+        relBack.setOnClickListener(v -> onBackPressed());
 
         txtQuantityOfFish = findViewById(R.id.txtQuantityOfFish);
         txtDateOfStocking= findViewById(R.id.txtDateOfStocking);
         txtFishSize= findViewById(R.id.txtFishSize);
         txtSourceOfFeed= findViewById(R.id.txtSourceOfFeed);
-         txtHarvestDate= findViewById(R.id.txtHarvestDate);
+        txtHarvestDate= findViewById(R.id.txtHarvestDate);
         txtQuantityHarvested= findViewById(R.id.txtQuantityHarvested);
         txtWeightOfFishHarvested= findViewById(R.id.txtWeightOfFishHarvested);
         txtPriceOfFishPerKg= findViewById(R.id.txtPriceOfFishPerKg);
-
         txtIncubatedEggs = findViewById(R.id.txtIncubatedEggs);
         txtEggsHatched = findViewById(R.id.txtEggsHatched);
         txtIncubationDuration = findViewById(R.id.txtIncubationDuration);
@@ -151,58 +155,62 @@ public class ProductionDataActivity extends AppCompatActivity
         txtFinalAvgWeight = findViewById(R.id.txtFinalAvgWeight);
         txtIncubationDuration = findViewById(R.id.txtIncubationDuration);
         btnSubmit = findViewById(R.id.btnSubmit);
-
         qtyFeed.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
                 feedlist = getResources().getStringArray(R.array.feed);
-               // requestClass.quantityOfFeedPerDay = Integer.parseInt(feedlist[position]);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent)
             {
 
             }
         });
+        if(pond.pondType==null){
+            pond.pondType = "Hatcheries";
+        }
         if(pond.pondType.equals("Pond") || pond.pondType.equals("Cage")){
             relHatcheries.setVisibility(View.GONE);
             relPondCages.setVisibility(View.VISIBLE);
             pondMode=true;
         }else{
+            pondMode=false;
             relHatcheries.setVisibility(View.VISIBLE);
             relPondCages.setVisibility(View.GONE);
         }
         btnSubmit.setOnClickListener(v -> {
-            progressDialog.show();
-            requestClass.pondId = Integer.parseInt(PondID.getText().toString().trim());
-            if(pondMode){
-                requestClass.quantityOfFish = txtQuantityOfFish.getText().toString().trim();
-                requestClass.dateOfStocking = txtDateOfStocking.getText().toString().trim();
-                requestClass.sizeOfFish = Integer.parseInt(txtFishSize.getText().toString().trim());
-                requestClass.quantityOfFeedPerDay = Float.parseFloat(qtyFeed.getSelectedItem().toString().trim());
-                requestClass.sourceOfFeed = txtSourceOfFeed.getText().toString().trim();
-                requestClass.harvestDate = txtHarvestDate.getText().toString().trim();
-                requestClass.quantityOfFishHarvested = Integer.parseInt(txtQuantityHarvested.getText().toString().trim());
-                requestClass.weightOfFishHarvested = Integer.parseInt(txtWeightOfFishHarvested.getText().toString().trim());
-                requestClass.pricePerKg = Integer.parseInt(txtPriceOfFishPerKg.getText().toString().trim());
-            }else{
-                requestClass.incubatedEggs = Integer.parseInt(txtIncubatedEggs.getText().toString().trim());
-                requestClass.hatchedEggs = Integer.parseInt(txtEggsHatched.getText().toString().trim());
-                requestClass.incubationDuration = Integer.parseInt(txtIncubationDuration.getText().toString().trim());
-                requestClass.noOfFriesStocked = Integer.parseInt(txtNoOfFriesStocked.getText().toString().trim());
-                requestClass.noOfFriesRecovered = Integer.parseInt(txtNoOfFriesRecovered.getText().toString().trim());
-                requestClass.sexReversalDuration = Integer.parseInt(txtSexReversalDuration.getText().toString().trim());
-                requestClass.averageWeightStocking = Integer.parseInt(txtAvgWeightOfStocking.getText().toString().trim());
-                requestClass.averageWeightReversal = Integer.parseInt(txtWeightReversal.getText().toString().trim());
-                requestClass.noOfFriesStockingNursery = Integer.parseInt(txtNoOfFriesNursery.getText().toString().trim());
-                requestClass.noOfFriesStockingRecovered = Integer.parseInt(txtNoOfFriesRecovered.getText().toString().trim());
-                requestClass.durationOfNursery = Integer.parseInt(txtNurseryDuration.getText().toString().trim());
-                requestClass.finalAverageWeight = Integer.parseInt(txtFinalAvgWeight.getText().toString().trim());
+            if(validateFields()){
+                progressDialog.show();
+                requestClass.pondId = pond.pondId;
+                if(pondMode){
+                    requestClass.quantityOfFish = txtQuantityOfFish.getText().toString().trim();
+                    requestClass.dateOfStocking = txtDateOfStocking.getText().toString().trim();
+                    requestClass.sizeOfFish = Integer.parseInt(txtFishSize.getText().toString().trim());
+                    requestClass.quantityOfFeedPerDay = Float.parseFloat(qtyFeed.getSelectedItem().toString().trim());
+                    requestClass.sourceOfFeed = txtSourceOfFeed.getText().toString().trim();
+                    requestClass.harvestDate = txtHarvestDate.getText().toString().trim();
+                    requestClass.quantityOfFishHarvested = Integer.parseInt(txtQuantityHarvested.getText().toString().trim());
+                    requestClass.weightOfFishHarvested = Integer.parseInt(txtWeightOfFishHarvested.getText().toString().trim());
+                    requestClass.pricePerKg = Integer.parseInt(txtPriceOfFishPerKg.getText().toString().trim());
+                }else{
+                    requestClass.incubatedEggs = Integer.parseInt(txtIncubatedEggs.getText().toString().trim());
+                    requestClass.hatchedEggs = Integer.parseInt(txtEggsHatched.getText().toString().trim());
+                    requestClass.incubationDuration = Integer.parseInt(txtIncubationDuration.getText().toString().trim());
+                    requestClass.noOfFriesStocked = Integer.parseInt(txtNoOfFriesStocked.getText().toString().trim());
+                    requestClass.noOfFriesRecovered = Integer.parseInt(txtNoOfFriesRecovered.getText().toString().trim());
+                    requestClass.sexReversalDuration = Integer.parseInt(txtSexReversalDuration.getText().toString().trim());
+                    requestClass.averageWeightStocking = Integer.parseInt(txtAvgWeightOfStocking.getText().toString().trim());
+                    requestClass.averageWeightReversal = Integer.parseInt(txtWeightReversal.getText().toString().trim());
+                    requestClass.noOfFriesStockingNursery = Integer.parseInt(txtNoOfFriesNursery.getText().toString().trim());
+                    requestClass.noOfFriesStockingRecovered = Integer.parseInt(txtNoOfFriesRecovered.getText().toString().trim());
+                    requestClass.durationOfNursery = Integer.parseInt(txtNurseryDuration.getText().toString().trim());
+                    requestClass.finalAverageWeight = Integer.parseInt(txtFinalAvgWeight.getText().toString().trim());
+                }
+                new addProductionData().execute();
             }
-            new addProductionData().execute();
+
         });
 
         relRecord.setOnClickListener(v -> AndroidAudioRecorder.with(ProductionDataActivity.this)
@@ -217,6 +225,99 @@ public class ProductionDataActivity extends AppCompatActivity
                 .setKeepDisplayOn(true)
                 // Start recording
                 .record());
+    }
+
+    private boolean validateFields(){
+        validationErrors.clear();
+        if(pondMode){
+            if (validateTor.isEmpty( txtQuantityOfFish.getText().toString())) {
+                txtQuantityOfFish.setError("Quantity of fish is required");
+                validationErrors.add("Quantity of fish is required");
+            }
+            if (validateTor.isEmpty(txtDateOfStocking.getText().toString())) {
+                txtDateOfStocking.setError("Date of Stocking is required");
+                validationErrors.add("Date of Stocking is required");
+            }
+            if (validateTor.isEmpty(txtFishSize.getText().toString()) || !validateTor.isNumeric(txtFishSize.getText().toString())) {
+                txtFishSize.setError("Fish size must be numeric");
+                validationErrors.add("Fish size must be numeric");
+            }
+            if (validateTor.isEmpty(qtyFeed.getSelectedItem().toString()) || !validateTor.isNumeric(qtyFeed.getSelectedItem().toString())) {
+                txtFishSize.setError("Quantity of feed is required");
+                validationErrors.add("Quantity of feed is required");
+            }
+            if (validateTor.isEmpty(qtyFeed.getSelectedItem().toString()) || !validateTor.isNumeric(qtyFeed.getSelectedItem().toString())) {
+                txtFishSize.setError("Fish size must be numeric");
+                validationErrors.add("Fish size must be numeric");
+            }
+            if (validateTor.isEmpty(txtSourceOfFeed.getText().toString())) {
+                txtSourceOfFeed.setError("Source of feed is required");
+                validationErrors.add("Source of feed is required");
+            }
+            if (validateTor.isEmpty(txtHarvestDate.getText().toString())) {
+                txtHarvestDate.setError("Harvest date is required");
+                validationErrors.add("Harvest date is required");
+            }
+            if (validateTor.isEmpty(txtQuantityHarvested.getText().toString())) {
+                txtQuantityHarvested.setError("Quantity Harvested is required");
+                validationErrors.add("Harvest date is required");
+            }
+            if (validateTor.isEmpty(txtWeightOfFishHarvested.getText().toString())) {
+                txtWeightOfFishHarvested.setError("Weight of fish is required");
+                validationErrors.add("Weight of fish is required");
+            }
+            if (validateTor.isEmpty(txtPriceOfFishPerKg.getText().toString())) {
+                txtPriceOfFishPerKg.setError("Price of fish is required");
+                validationErrors.add("Price of fish is required");
+            }
+        }else{
+            if (validateTor.isEmpty(txtIncubatedEggs.getText().toString())) {
+                txtIncubatedEggs.setError("Incubated eggs is required");
+                validationErrors.add("Incubated eggs is required");
+            }
+            if (validateTor.isEmpty(txtEggsHatched.getText().toString())) {
+                txtEggsHatched.setError("Eggs hatched is required");
+                validationErrors.add("Eggs hatched is required");
+            }
+            if (validateTor.isEmpty(txtIncubationDuration.getText().toString())) {
+                txtIncubationDuration.setError("Incubation duration is required");
+                validationErrors.add("Incubation duration is required");
+            }
+            if (validateTor.isEmpty(txtNoOfFriesStocked.getText().toString())) {
+                txtNoOfFriesStocked.setError("No of fries stocked is required");
+                validationErrors.add("No of fries stocked is required");
+            }
+            if (validateTor.isEmpty(txtNoOfFriesRecovered.getText().toString())) {
+                txtNoOfFriesRecovered.setError("No of fries recovered is required");
+                validationErrors.add("No of fries recovered is required");
+            }
+            if (validateTor.isEmpty(txtSexReversalDuration.getText().toString())) {
+                txtSexReversalDuration.setError("Required");
+                validationErrors.add("Required");
+            }
+            if (validateTor.isEmpty(txtAvgWeightOfStocking.getText().toString())) {
+                txtAvgWeightOfStocking.setError("Required");
+                validationErrors.add("Required");
+            }
+            if (validateTor.isEmpty(txtWeightReversal.getText().toString())) {
+                txtWeightReversal.setError("Required");
+                validationErrors.add("Required");
+            }
+            if (validateTor.isEmpty(txtNoOfFriesNursery.getText().toString())) {
+                txtNoOfFriesNursery.setError("Required");
+                validationErrors.add("Required");
+            }
+            if (validateTor.isEmpty(txtNurseryDuration.getText().toString())) {
+                txtNurseryDuration.setError("Required");
+                validationErrors.add("Required");
+            }
+            if (validateTor.isEmpty(txtFinalAvgWeight.getText().toString())) {
+                txtFinalAvgWeight.setError("Required");
+                validationErrors.add("Required");
+            }
+         }
+
+        return validationErrors.size() <= 0;
     }
 
     class addProductionData extends AsyncTask<Void, Void, Void>

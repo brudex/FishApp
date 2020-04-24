@@ -2,21 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.inspierra.fishapp">
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
-        android:allowBackup="true"
+         android:allowBackup="true"
         android:icon="@drawable/fishnew"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logofish"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:usesCleartextTraffic="true">
+        android:largeHeap="true"
+        android:usesCleartextTraffic="true"
+         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".Activities.HomePageActivity"
+            android:label="@string/title_home"
+            android:hardwareAccelerated="true">
+        </activity>
         <activity
             android:name=".Activities.MainActivity"
             android:configChanges="orientation"
@@ -29,11 +33,12 @@
         <activity
             android:name=".Activities.SignupActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.Hub"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Activities.ProfileActivity"
             android:configChanges="orientation"
@@ -58,7 +63,7 @@
             android:name=".Activities.EconIndicator"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-       <activity
+        <activity
             android:name=".Activities.EconomicIndicatorOutput"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
@@ -68,6 +73,22 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.FishHealthOutputActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ProductionDataOutputActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SearchFormActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.SearchFarmsResultActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ForgotPasswordActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity

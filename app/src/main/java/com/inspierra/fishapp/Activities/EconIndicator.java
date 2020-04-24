@@ -1,9 +1,7 @@
 package com.inspierra.fishapp.Activities;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.bumptech.glide.Glide;
 import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.google.gson.Gson;
 import com.inspierra.fishapp.HelpingClasses.SaveEconomicIndicatorRequest;
@@ -27,9 +24,16 @@ import com.inspierra.fishapp.Utilities.AcquaApiClient;
 import com.inspierra.fishapp.Utilities.AcquahService;
 import com.inspierra.fishapp.Utilities.PrefsUtil;
 import com.libizo.CustomEditText;
+import com.raywenderlich.android.validatetor.ValidateTor;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import br.com.joinersa.oooalertdialog.Animation;
+import br.com.joinersa.oooalertdialog.OoOAlertDialog;
 import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
 import cafe.adriel.androidaudiorecorder.model.AudioChannel;
 import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
@@ -47,35 +51,29 @@ public class EconIndicator extends AppCompatActivity
     CustomEditText no_owrker, no_pond, amt_rec, amt_spnt;
     SaveEconomicIndicatorRequest reqq;
     LoadingButton btnLoad;
-
     ProgressDialog progressDialog;
     AcquahService acquahService;
-    UserPondsClass pond;
-
+    //UserPondsClass pond;
     String filePath;
     int color;
     int requestCode = 0;
     RelativeLayout relRecord;
-    RelativeLayout imgback;
+    RelativeLayout imgBack;
+    ValidateTor validateTor = new ValidateTor();
+    List<String> validationErrors;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.econ_layout);
-        Intent intent = getIntent();
-        pond = new Gson().fromJson(intent.getStringExtra("pond"), UserPondsClass.class);
-
+        validationErrors = new ArrayList<>();
         filePath = Environment.getExternalStorageDirectory() + "/recorded_audio.wav";
         color = getResources().getColor(R.color.blueGray200);
-
         ActivityCompat.requestPermissions(this,
                 new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO, READ_EXTERNAL_STORAGE}, 0);
-
-        //ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, 0);
-
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Completing Registration"); // Setting Message
+        progressDialog.setMessage("Saving Data"); // Setting Message
         progressDialog.setTitle("Processing"); // Setting Title
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
         progressDialog.setCancelable(false);
@@ -85,8 +83,6 @@ public class EconIndicator extends AppCompatActivity
         {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-          /* setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);*/
         }
         relRecord = findViewById(R.id.relRecord);
         no_owrker = findViewById(R.id.no_owrker);
@@ -94,46 +90,59 @@ public class EconIndicator extends AppCompatActivity
         amt_spnt = findViewById(R.id.amt_spnt);
         no_pond = findViewById(R.id.no_pond);
         btnLoad = findViewById(R.id.btnLoad);
-        imgback = findViewById(R.id.imgback);
+        imgBack = findViewById(R.id.imgBack);
         reqq = new SaveEconomicIndicatorRequest();
         //reqq.pondId = pond.pondId;
-        imgback.setOnClickListener(v -> {
+        imgBack.setOnClickListener(v -> {
             onBackPressed();
         });
         btnLoad.setOnClickListener(v -> {
-            reqq.moneyReceived = Integer.parseInt(amt_rec.getText().toString().trim());
-            reqq.moneySpent = Integer.parseInt(amt_spnt.getText().toString().trim());
-            reqq.noOfWorkers = Integer.parseInt(no_owrker.getText().toString().trim());
-            reqq.numberOfPonds = Integer.parseInt(no_pond.getText().toString().trim());
-            if (reqq.noOfWorkers == 0
-                    || reqq.numberOfPonds == 0
-                    || reqq.moneySpent == 0
-                    || reqq.moneyReceived == 0)
-            {
-                Toast.makeText(this, "All Data Must Be Provided", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
+            if(validateFields()){
+                reqq.moneyReceived = Integer.parseInt(amt_rec.getText().toString().trim());
+                reqq.moneySpent = Integer.parseInt(amt_spnt.getText().toString().trim());
+                reqq.noOfWorkers = Integer.parseInt(no_owrker.getText().toString().trim());
+                reqq.numberOfPonds = Integer.parseInt(no_pond.getText().toString().trim());
                 progressDialog.show();
                 new SaveIndicator().execute();
             }
         });
         relRecord.setOnClickListener(v -> AndroidAudioRecorder.with(EconIndicator.this)
-                // Required
-                .setFilePath(filePath)
-                .setColor(color)
-                .setRequestCode(requestCode)
-
-                // Optional
-                .setSource(AudioSource.MIC)
-                .setChannel(AudioChannel.STEREO)
-                .setSampleRate(AudioSampleRate.HZ_48000)
-                .setAutoStart(true)
-                .setKeepDisplayOn(true)
-
+                 .setFilePath(filePath)
+                 .setColor(color)
+                 .setRequestCode(requestCode)
+                 .setSource(AudioSource.MIC)
+                 .setChannel(AudioChannel.STEREO)
+                 .setSampleRate(AudioSampleRate.HZ_48000)
+                 .setAutoStart(true)
+                 .setKeepDisplayOn(true)
                 // Start recording
                 .record());
     }
+
+
+    private boolean validateFields(){
+        validationErrors.clear();
+        if (validateTor.isEmpty(amt_rec.getText().toString().trim())) {
+            amt_rec.setError("The field is required");
+            validationErrors.add("The field is required");
+        }
+        if (validateTor.isEmpty(amt_spnt.getText().toString().trim())) {
+            amt_spnt.setError("The field is required");
+            validationErrors.add("The field is required");
+        }
+        if (validateTor.isEmpty(no_owrker.getText().toString().trim())) {
+            no_owrker.setError("The field is required");
+            validationErrors.add("The field is required");
+        }
+        if (validateTor.isEmpty(no_pond.getText().toString().trim())) {
+            no_pond.setError("The field is required");
+            validationErrors.add("The field is required");
+        }
+
+
+        return validationErrors.size() <= 0;
+    }
+
 
     class SaveIndicator extends AsyncTask<Void, Void, Void>
     {
@@ -153,17 +162,28 @@ public class EconIndicator extends AppCompatActivity
                     assert response.body() != null;
                     if (response.body().status.equals("00"))
                     {
-                        Toast.makeText(EconIndicator.this, "Update Successful", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(EconIndicator.this, "Update Successful", Toast.LENGTH_SHORT).show();
+                        new OoOAlertDialog.Builder(EconIndicator.this)
+                                .setTitle("Success")
+                                .setMessage("Data successfully saved")
+                                .setAnimation(Animation.POP)
+                                .setPositiveButton("Ok", null)
+                                .setPositiveButtonColor(R.color.green)
+                                .build();
                     }
                     else
                     {
-                        Toast.makeText(EconIndicator.this, "Update Failed. Please try again", Toast.LENGTH_SHORT).show();
+                        if(response.body().message!=null){
+                           Toast.makeText(EconIndicator.this, "Update Failed. Please try again", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 }
 
                 @Override
                 public void onFailure(@NotNull Call<SaveEconomicIndicatorResponse> call, @NotNull Throwable t)
                 {
+                    progressDialog.dismiss();
                     Toast.makeText(EconIndicator.this, "Update Failed. Please try again", Toast.LENGTH_SHORT).show();
                 }
             });

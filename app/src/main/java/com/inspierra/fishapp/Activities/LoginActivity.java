@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -23,9 +24,12 @@ import com.inspierra.fishapp.Utilities.AcquaApiClient;
 import com.inspierra.fishapp.Utilities.AcquahService;
 import com.inspierra.fishapp.Utilities.PrefsUtil;
 import com.libizo.CustomEditText;
+import com.raywenderlich.android.validatetor.ValidateTor;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -39,22 +43,23 @@ public class LoginActivity extends AppCompatActivity
     ProgressDialog progressDialog;
     AcquahService acquahService;
     LoginRequestClass requestClass;
-
+    TextView tvForgotPassword;
     RelativeLayout imgback;
+    ValidateTor validateTor = new ValidateTor();
+    List<String> validationErrors;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait..."); // Setting Message
         progressDialog.setTitle("Processing"); // Setting Title
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
         progressDialog.setCancelable(false);
         acquahService = AcquaApiClient.getClient().create(AcquahService.class);
-
+        validationErrors=new ArrayList<>();
         if (Build.VERSION.SDK_INT < 21)
         {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -78,25 +83,46 @@ public class LoginActivity extends AppCompatActivity
         username = findViewById(R.id.txtfname);
         password = findViewById(R.id.txtmname);
         btnSubmit = findViewById(R.id.btnSubmit);
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
         imgback = findViewById(R.id.imgback);
+
         btnSubmit.setOnClickListener(v -> {
             requestClass = new LoginRequestClass();
             requestClass.password = Objects.requireNonNull(password.getText()).toString().trim();
             requestClass.userName = Objects.requireNonNull(username.getText()).toString().trim();
-            if (requestClass.userName.equals("") || requestClass.password.equals(""))
-            {
-                Toast.makeText(LoginActivity.this, "Login information required", Toast.LENGTH_SHORT).show();
-            }
-            else
+
+            if (validateFields())
             {
                 progressDialog.show();
                 new doLogin().execute();
+
             }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "Login information required", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tvForgotPassword.setOnClickListener(v -> {
+            startActivity(new Intent(this,ForgotPasswordActivity.class));
         });
 
         imgback.setOnClickListener(v -> {
             onBackPressed();
         });
+    }
+
+    private boolean validateFields(){
+        validationErrors.clear();
+        if (validateTor.isEmpty(requestClass.userName)) {
+            username.setError("Email or phone number is required");
+            validationErrors.add("Email or phone number is required");
+        }
+        if (validateTor.isEmpty(requestClass.password)) {
+            password.setError("Password is required");
+            validationErrors.add("Password is required");
+        }
+        return validationErrors.size() <= 0;
     }
 
     class doLogin extends AsyncTask<Void, Void, Void>
@@ -118,18 +144,19 @@ public class LoginActivity extends AppCompatActivity
                         if (response.body().success)
                         {
                             PrefsUtil.storeTempTokenData(LoginActivity.this, new Gson().toJson(response.body()));
-                            Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, Hub.class));
+                            Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
                             LoginActivity.this.finish();
                         }
                         else
                         {
-                            Toast.makeText(LoginActivity.this, "Login failed. Try again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Login failed. Try again", Toast.LENGTH_SHORT).show();
                         }
                     }
                     catch (Exception ex)
                     {
-                        Toast.makeText(LoginActivity.this, "Login failed. Try again", Toast.LENGTH_SHORT).show();
+                        ex.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Login failed. Try again", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -137,7 +164,7 @@ public class LoginActivity extends AppCompatActivity
                 public void onFailure(Call<LoginResponseClass> call, Throwable t)
                 {
                     progressDialog.dismiss();
-                    Toast.makeText(LoginActivity.this, "Login failed. Try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Login failed. Try again", Toast.LENGTH_SHORT).show();
                 }
             });
             return null;
