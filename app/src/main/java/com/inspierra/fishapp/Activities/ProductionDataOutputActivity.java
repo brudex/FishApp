@@ -95,7 +95,7 @@ public class ProductionDataOutputActivity extends AppCompatActivity
 
     private  void  addToChartItems(String chartTitle, List<LabelValueField> fields){
         if(fields!=null && fields.size() > 0){
-            Pair<LineData, ValueFormatter> pair =GraphService.getLineDataFromValueLabels("Growth In Work Force ",fields);
+            Pair<LineData, ValueFormatter> pair =GraphService.getLineDataFromValueLabels(chartTitle,fields);
             LineData lineData = pair.first;
             dataAvailable=true;
             chartItems.add(new LineChartItem(lineData,pair.second, getApplicationContext()));
@@ -132,7 +132,6 @@ public class ProductionDataOutputActivity extends AppCompatActivity
                     addToChartItems("Specific Growth rate",output.specificGrowthRate);
                     addToChartItems("Quantity of Fish",output.quantityOfFish);
                     addToChartItems("Size of fish",output.sizeOfFish);
-                    addToChartItems("Source of feed",output.sourceOfFeed);
                     addToChartItems("Quantity of feed per day",output.quantityOfFeedPerDay);
                     addToChartItems("Quantity of fish harvested",output.quantityOfFishHarvested);
                     addToChartItems("Weight of fish harvested",output.weightOfFishHarvested);
@@ -155,6 +154,7 @@ public class ProductionDataOutputActivity extends AppCompatActivity
                 @Override
                 public void onFailure(@NotNull Call<ProductionDataOutput> call, @NotNull Throwable t)
                 {
+                    progressDialog.dismiss();
                     new OoOAlertDialog.Builder(ProductionDataOutputActivity.this)
                             .setTitle("Error")
                             .setMessage("Could not get data for production data.")

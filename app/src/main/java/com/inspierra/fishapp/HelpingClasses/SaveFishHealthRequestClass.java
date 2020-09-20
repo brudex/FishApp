@@ -6,12 +6,12 @@ public class SaveFishHealthRequestClass
     public String waterQuality;
     public String waterPictureLink;
     public String colorOfWater;
-    public String mortality;
+    public int mortality;
     public String fishDiseasePicture;
-    public int phLevel;
-    public int dissolvedOxygen;
-    public int temperature;
-    public int ammonia;
-    public int nitrite;
-    public int turbidity;
+    public float phLevel;
+    public float dissolvedOxygen;
+    public float temperature;
+    public float ammonia;
+    public float nitrite;
+    public float turbidity;
 }

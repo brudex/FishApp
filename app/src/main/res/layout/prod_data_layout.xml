@@ -82,15 +82,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="5dp"
             android:layout_below="@+id/imgBack"
             android:id="@+id/tvTitle"
             android:text="Production Data Form"
+            style="@style/headerTitle2"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/tvTitle"
+            android:id="@+id/tvPondName"
+            android:text="Production Data Form"
             style="@style/headerTitle"
+             android:textSize="15sp"
+
             />
     </RelativeLayout>
     <ScrollView
@@ -141,7 +154,7 @@
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -190,6 +203,8 @@
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:typeface="sans"
+                            android:clickable="true"
+                            android:editable="false"
                             app:libIZO_clearIconTint="@color/black"
                             app:libIZO_setBackgroundColor="#bfffffff"
                             app:libIZO_setBorderColor="@color/greylight"
@@ -197,7 +212,8 @@
                             app:libIZO_setClearIconVisible="true"
                             app:libIZO_setCornerRadius="3dp"
                             app:libIZO_setPrefixTextColor="@color/black"
-                            app:libIZO_setStrokeWidth="1dp" />
+                            app:libIZO_setStrokeWidth="1dp"
+                            android:focusable="true" />
 
                     </RelativeLayout>
                     <RelativeLayout
@@ -222,7 +238,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="numberDecimal"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -263,7 +279,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="text"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -331,14 +347,17 @@
                             android:layout_marginStart="25dp"
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                             android:gravity="left|center"
+                            android:gravity="left|center"
                             android:inputType="textPersonName"
                             android:singleLine="true"
+                            android:clickable="true"
+                            android:editable="false"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:typeface="sans"
+
                             app:libIZO_clearIconTint="@color/black"
                             app:libIZO_setBackgroundColor="#bfffffff"
                             app:libIZO_setBorderColor="@color/greylight"
@@ -346,7 +365,8 @@
                             app:libIZO_setClearIconVisible="true"
                             app:libIZO_setCornerRadius="3dp"
                             app:libIZO_setPrefixTextColor="@color/black"
-                            app:libIZO_setStrokeWidth="1dp" />
+                            app:libIZO_setStrokeWidth="1dp"
+                            android:focusable="true" />
 
 
                     </RelativeLayout>
@@ -375,7 +395,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -408,8 +428,6 @@
                             android:gravity="center"
                             android:text="Weight of Fish Harvested"
                             style="@style/FormLabel.Gray" />
-
-
                         <com.libizo.CustomEditText
                             android:id="@+id/txtWeightOfFishHarvested"
                             android:layout_width="match_parent"
@@ -417,8 +435,8 @@
                             android:layout_marginStart="25dp"
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                             android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:gravity="left|center"
+                            android:inputType="numberDecimal"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -433,8 +451,6 @@
                             app:libIZO_setCornerRadius="3dp"
                             app:libIZO_setPrefixTextColor="@color/black"
                             app:libIZO_setStrokeWidth="1dp" />
-
-
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/relPriceOfFishPerKg"
@@ -456,13 +472,13 @@
                         <com.libizo.CustomEditText
                             android:id="@+id/txtPriceOfFishPerKg"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="numberDecimal"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -477,12 +493,8 @@
                             app:libIZO_setCornerRadius="3dp"
                             app:libIZO_setPrefixTextColor="@color/black"
                             app:libIZO_setStrokeWidth="1dp" />
-
-
                     </RelativeLayout>
                 </RelativeLayout>
-
-
                 <RelativeLayout android:id="@+id/relHatcheries"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -508,7 +520,7 @@
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -547,7 +559,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -576,7 +588,7 @@
                             android:layout_marginStart="25dp"
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
-                            android:text="Incubation Duration"
+                            android:text="Duration of Incubation"
                             style="@style/FormLabel.Gray"/>
 
                         <com.libizo.CustomEditText
@@ -587,7 +599,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -627,7 +639,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -666,7 +678,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -693,20 +705,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
-                            android:text="Sex Reversal Duration"
+                             android:gravity="center"
+                            android:text="Sex Reversal Duration(In Days)"
                             style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/txtSexReversalDuration"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -745,7 +756,7 @@
                             android:layout_marginEnd="25dp"
                             android:layout_marginBottom="15dp"
                             android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="numberDecimal"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -785,7 +796,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -824,7 +835,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -864,7 +875,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -893,7 +904,7 @@
                             android:layout_marginStart="25dp"
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
-                            android:text="Nursery Duration"
+                            android:text="Nursery Duration(In Days)"
                             style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
@@ -904,7 +915,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -944,7 +955,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
                              android:gravity="left|center"
-                            android:inputType="textPersonName"
+                            android:inputType="numberDecimal"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"

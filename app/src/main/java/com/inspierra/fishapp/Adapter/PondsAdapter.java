@@ -71,7 +71,7 @@ public class PondsAdapter extends RecyclerView.Adapter
                 BusStation.getBus().post(ponds.get(position));
             });
 
-            txtName.setText(pp.pondName);
+            txtName.setText(pp.pondName.toUpperCase());
             tvPondType.setText(pp.pondType);
         }
         catch (Exception ex)

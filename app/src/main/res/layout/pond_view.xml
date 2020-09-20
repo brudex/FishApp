@@ -11,17 +11,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <ImageView
             android:id="@+id/imgIconLogo"
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:src="@drawable/logofish"
+            android:layout_marginBottom="0dp"
             android:scaleType="centerCrop"/>
         <RelativeLayout android:id="@+id/relTitle"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/imgIconLogo"
+            android:layout_marginBottom="0dp"
           >
             <TextView
                 android:id="@+id/tvFarmName"
@@ -44,14 +45,14 @@
                 android:textColor="@color/white"
                 android:background="@drawable/pill_shape"
                 android:clickable="false"
-                 android:textSize="10sp" />
+                android:textSize="10sp" />
 
         </RelativeLayout>
 
 
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="60dp"
+           android:layout_height="wrap_content"
            android:orientation="horizontal"
            android:gravity="bottom"
            android:layout_alignParentBottom="true">

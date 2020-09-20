@@ -18,12 +18,9 @@ public class ProductionDataOutput {
         public List<LabelValueField>  durationOfCulture;
         public List<LabelValueField>  specificGrowthRate;
         public List<LabelValueField>  quantityOfFish;
-        public List<LabelValueField>  dateOfStocking;
-        public List<LabelValueField>  sizeOfFish;
-        public List<LabelValueField>  sourceOfFeed;
-        public List<LabelValueField>  quantityOfFeedPerDay;
-        public List<LabelValueField>  harvestDate;
-        public List<LabelValueField>  quantityOfFishHarvested;
+         public List<LabelValueField>  sizeOfFish;
+         public List<LabelValueField>  quantityOfFeedPerDay;
+         public List<LabelValueField>  quantityOfFishHarvested;
         public List<LabelValueField>  weightOfFishHarvested;
         public List<LabelValueField> pricePerKg;
 

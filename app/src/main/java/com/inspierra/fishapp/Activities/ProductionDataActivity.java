@@ -2,6 +2,7 @@ package com.inspierra.fishapp.Activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,9 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,10 +43,15 @@ import com.raywenderlich.android.validatetor.ValidateTor;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
+import java.util.Locale;
 
+import br.com.joinersa.oooalertdialog.Animation;
+import br.com.joinersa.oooalertdialog.OnClickListener;
+import br.com.joinersa.oooalertdialog.OoOAlertDialog;
 import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
 import cafe.adriel.androidaudiorecorder.model.AudioChannel;
 import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
@@ -50,10 +59,6 @@ import cafe.adriel.androidaudiorecorder.model.AudioSource;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.RECORD_AUDIO;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class ProductionDataActivity extends AppCompatActivity
 {
@@ -66,7 +71,7 @@ public class ProductionDataActivity extends AppCompatActivity
     txtQuantityHarvested,txtWeightOfFishHarvested,txtPriceOfFishPerKg,
     txtIncubatedEggs,txtEggsHatched,txtIncubationDuration,txtNoOfFriesStocked,txtNoOfFriesRecovered,txtSexReversalDuration,txtAvgWeightOfStocking,
             txtWeightReversal,txtNoOfFriesNursery,txtStockingRecovered,txtNurseryDuration,txtFinalAvgWeight;
-
+    TextView tvTitle,tvPondName;
     LoadingButton btnSubmit;
     UserPondsClass pond;
     ImageView FishDisease;
@@ -79,7 +84,9 @@ public class ProductionDataActivity extends AppCompatActivity
      String[] feedlist;
     ValidateTor validateTor = new ValidateTor();
     List<String> validationErrors;
+    static int CONTROL_SOURCE = 0;
 
+    final Calendar myCalendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -107,7 +114,6 @@ public class ProductionDataActivity extends AppCompatActivity
         {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         }
 
         try
@@ -130,9 +136,7 @@ public class ProductionDataActivity extends AppCompatActivity
         relBack = findViewById(R.id.imgBack);
 
         relRecord = findViewById(R.id.relRecord);
-        //PondID = findViewById(R.id.PondID);
         relBack.setOnClickListener(v -> onBackPressed());
-
         txtQuantityOfFish = findViewById(R.id.txtQuantityOfFish);
         txtDateOfStocking= findViewById(R.id.txtDateOfStocking);
         txtFishSize= findViewById(R.id.txtFishSize);
@@ -154,7 +158,10 @@ public class ProductionDataActivity extends AppCompatActivity
         txtNurseryDuration = findViewById(R.id.txtNurseryDuration);
         txtFinalAvgWeight = findViewById(R.id.txtFinalAvgWeight);
         txtIncubationDuration = findViewById(R.id.txtIncubationDuration);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvPondName = findViewById(R.id.tvPondName);
         btnSubmit = findViewById(R.id.btnSubmit);
+        tvPondName.setText(pond.pondName.toUpperCase());
         qtyFeed.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
@@ -166,6 +173,51 @@ public class ProductionDataActivity extends AppCompatActivity
             public void onNothingSelected(AdapterView<?> parent)
             {
 
+            }
+        });
+
+         DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                if(CONTROL_SOURCE == 1){
+                    updateControl(txtHarvestDate);
+                }else if(CONTROL_SOURCE==2){
+                    updateControl(txtDateOfStocking);
+                }
+            }
+
+        };
+         txtHarvestDate.setFocusable(true);
+         txtHarvestDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(view.hasFocus()){
+                    DatePickerDialog dialog =   new DatePickerDialog(ProductionDataActivity.this, onDateSetListener, myCalendar
+                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                            myCalendar.get(Calendar.DAY_OF_MONTH));
+                    dialog.setTitle("Select Harvest Date");
+                    dialog.show();
+                    CONTROL_SOURCE =1;
+                }
+
+            }
+        });
+        txtDateOfStocking.setFocusable(true);
+        txtDateOfStocking.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(view.hasFocus()){
+                    DatePickerDialog dialog =   new DatePickerDialog(ProductionDataActivity.this, onDateSetListener, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                    dialog.setTitle("Select Date of Stocking");
+                    dialog.show();
+                CONTROL_SOURCE =2;
+               }
             }
         });
         if(pond.pondType==null){
@@ -205,8 +257,8 @@ public class ProductionDataActivity extends AppCompatActivity
                     requestClass.averageWeightReversal = Integer.parseInt(txtWeightReversal.getText().toString().trim());
                     requestClass.noOfFriesStockingNursery = Integer.parseInt(txtNoOfFriesNursery.getText().toString().trim());
                     requestClass.noOfFriesStockingRecovered = Integer.parseInt(txtNoOfFriesRecovered.getText().toString().trim());
-                    requestClass.durationOfNursery = Integer.parseInt(txtNurseryDuration.getText().toString().trim());
-                    requestClass.finalAverageWeight = Integer.parseInt(txtFinalAvgWeight.getText().toString().trim());
+                    requestClass.durationOfNursery = Math.round(Float.parseFloat(txtNurseryDuration.getText().toString().trim()));
+                    requestClass.finalAverageWeight = Float.parseFloat(txtFinalAvgWeight.getText().toString().trim());
                 }
                 new addProductionData().execute();
             }
@@ -227,6 +279,11 @@ public class ProductionDataActivity extends AppCompatActivity
                 .record());
     }
 
+    private void updateControl(EditText editText) {
+        String myFormat = "yyyy/MM/dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        editText.setText(sdf.format(myCalendar.getTime()));
+    }
     private boolean validateFields(){
         validationErrors.clear();
         if(pondMode){
@@ -238,17 +295,17 @@ public class ProductionDataActivity extends AppCompatActivity
                 txtDateOfStocking.setError("Date of Stocking is required");
                 validationErrors.add("Date of Stocking is required");
             }
-            if (validateTor.isEmpty(txtFishSize.getText().toString()) || !validateTor.isNumeric(txtFishSize.getText().toString())) {
+            if (validateTor.isEmpty(txtFishSize.getText().toString())) {
+                txtFishSize.setError("Fish size is required");
+                validationErrors.add("Fish size is required");
+            }
+            if (!validateTor.isNumeric(txtFishSize.getText().toString())) {
                 txtFishSize.setError("Fish size must be numeric");
                 validationErrors.add("Fish size must be numeric");
             }
-            if (validateTor.isEmpty(qtyFeed.getSelectedItem().toString()) || !validateTor.isNumeric(qtyFeed.getSelectedItem().toString())) {
-                txtFishSize.setError("Quantity of feed is required");
-                validationErrors.add("Quantity of feed is required");
-            }
-            if (validateTor.isEmpty(qtyFeed.getSelectedItem().toString()) || !validateTor.isNumeric(qtyFeed.getSelectedItem().toString())) {
-                txtFishSize.setError("Fish size must be numeric");
-                validationErrors.add("Fish size must be numeric");
+            if (validateTor.isEmpty(qtyFeed.getSelectedItem().toString())) {
+                 Toast.makeText(getApplicationContext(),"Please select quantity of feed",Toast.LENGTH_SHORT).show();
+                validationErrors.add("Please select quantity of feed");
             }
             if (validateTor.isEmpty(txtSourceOfFeed.getText().toString())) {
                 txtSourceOfFeed.setError("Source of feed is required");
@@ -340,8 +397,18 @@ public class ProductionDataActivity extends AppCompatActivity
                         assert response.body() != null;
                         if (response.body().status.equals("00"))
                         {
-                            Toast.makeText(ProductionDataActivity.this, " Data Added Successfully",
-                                    Toast.LENGTH_SHORT).show();
+                            new OoOAlertDialog.Builder(ProductionDataActivity.this)
+                                    .setTitle("Success")
+                                    .setMessage("Data successfully saved")
+                                    .setAnimation(Animation.POP)
+                                    .setPositiveButton("Ok", new OnClickListener() {
+                                        @Override
+                                        public void onClick() {
+                                           onBackPressed();
+                                        }
+                                    })
+                                    .setPositiveButtonColor(R.color.positive)
+                                    .build();
                         }
                         else
                         {
@@ -367,61 +434,7 @@ public class ProductionDataActivity extends AppCompatActivity
         }
     }
 
-    class getProductionData extends AsyncTask<Void, Void, Void>
-    {
 
-        @Override
-        protected Void doInBackground(Void... voids)
-        {
-            final Call<SaveProductionDataRequestClass> getFishHealth = acquahService.GetProductionData(requestClass,
-                    PrefsUtil.getTempTokenData(ProductionDataActivity.this));
-            getFishHealth.enqueue(new Callback<SaveProductionDataRequestClass>()
-            {
-                @Override
-                public void onResponse(@NotNull Call<SaveProductionDataRequestClass> call,
-                                       @NotNull Response<SaveProductionDataRequestClass> response)
-                {
-                    try
-                    {
-                        assert response.body() != null;
-                        if (response.body().pondId > 0)
-                        {
-                            txtQuantityOfFish.setText(response.body().quantityOfFish);
-                           /* dateofStocking = findViewById(R.id.dateofStocking);
-                            fishSize = findViewById(R.id.fishSize);
-                            Nitrite = findViewById(R.id.Nitrite);
-                            Turbidity = findViewById(R.id.Turbidity);
-                            eggsHatched = findViewById(R.id.eggsHatched);
-                            incubateTime = findViewById(R.id.incubateTime);
-                            noOfFries = findViewById(R.id.noOfFries);
-                            noOfFriesRecovered = findViewById(R.id.noOfFriesRecovered);
-                            SexReversal = findViewById(R.id.SexReversal);
-                            stockingWeight = findViewById(R.id.stockingWeight);
-                            weightReversal = findViewById(R.id.weightReversal);
-                            noOfFriesNursery = findViewById(R.id.noOfFriesNursery);
-                            friesRecovered = findViewById(R.id.friesRecovered);
-                            nurseryDuration = findViewById(R.id.nurseryDuration);
-                            avgWeight = findViewById(R.id.avgWeight);
-                            sourceOfFeed = findViewById(R.id.sourceOfFeed);
-                            fishDisease = findViewById(R.id.fishDisease);*/
-
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        String error = ex.getMessage();
-                    }
-                }
-
-                @Override
-                public void onFailure(@NotNull Call<SaveProductionDataRequestClass> call, @NotNull Throwable t)
-                {
-
-                }
-            });
-            return null;
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)

@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,10 +34,15 @@ import com.inspierra.fishapp.Utilities.AcquahService;
 import com.inspierra.fishapp.Utilities.BusStation;
 import com.inspierra.fishapp.Utilities.PrefsUtil;
 import com.libizo.CustomEditText;
+import com.raywenderlich.android.validatetor.ValidateTor;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.joinersa.oooalertdialog.Animation;
+import br.com.joinersa.oooalertdialog.OnClickListener;
 import br.com.joinersa.oooalertdialog.OoOAlertDialog;
 import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
 import cafe.adriel.androidaudiorecorder.model.AudioChannel;
@@ -57,12 +63,12 @@ public class FishHealthActivity extends AppCompatActivity
     SaveFishHealthRequestClass requestClass;
     FishHealthClass reqq;
     ImageView FishDisease;
-
     LoadingButton btnSubmit;
-    CustomEditText pondId,colorOfWater, mortality, phLevel,
+    CustomEditText colorOfWater, mortality, phLevel,
             Oxygen, Temperature, Ammonia, Nitrite, Turbidity;
     UserPondsClass pond;
     ImageView waterPicture;
+    TextView tvTitle,tvPondName;
 
     private String[] permissions = {Manifest.permission.CAMERA};
 
@@ -71,7 +77,8 @@ public class FishHealthActivity extends AppCompatActivity
     int color;
     int requestCode = 0;
     RelativeLayout relBack;
-
+    ValidateTor validateTor = new ValidateTor();
+    List<String> validationErrors;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -79,31 +86,20 @@ public class FishHealthActivity extends AppCompatActivity
         setContentView(R.layout.fish_health_layout);
         Intent intent = getIntent();
         pond = new Gson().fromJson(intent.getStringExtra("pond"), UserPondsClass.class);
-
+        validationErrors = new ArrayList<>();
         filePath = Environment.getExternalStorageDirectory() + "/recorded_audio.wav";
 
-//        ActivityCompat.requestPermissions(this,
-//                new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO, READ_EXTERNAL_STORAGE}, 0);
 
-//        ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, 0);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Saving Data"); // Setting Message
         progressDialog.setTitle("Processing"); // Setting Title
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
         progressDialog.setCancelable(false);
         acquahService = AcquaApiClient.getClient().create(AcquahService.class);
-//
-//        if (Build.VERSION.SDK_INT >= 21)
-//        {
-//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//          /* setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-//            getWindow().setStatusBarColor(Color.TRANSPARENT);*/
-//        }
-//
-        relBack = findViewById(R.id.relBack);
+
+        tvTitle = findViewById(R.id.tvTitle);
+        relBack = findViewById(R.id.imgBack);
         relRecord = findViewById(R.id.relRecord);
-//        pondId = findViewById(R.id.pondId);
         colorOfWater = findViewById(R.id.colorOfWater);
         waterPicture = findViewById(R.id.waterPicture);
         FishDisease = findViewById(R.id.FishDisease);
@@ -114,11 +110,14 @@ public class FishHealthActivity extends AppCompatActivity
         Ammonia = findViewById(R.id.Ammonia);
         Nitrite = findViewById(R.id.Nitrite);
         Turbidity = findViewById(R.id.Turbidity);
+        tvPondName = findViewById(R.id.tvPondName);
         btnSubmit = findViewById(R.id.btnSubmit);
+        tvPondName.setText(pond.pondName.toUpperCase());
         relBack.setOnClickListener(v -> {
             onBackPressed();
         });
-        FishDisease.setOnClickListener(v ->
+
+         FishDisease.setOnClickListener(v ->
         {
             if (ActivityCompat.checkSelfPermission(FishHealthActivity.this, Manifest.permission.CAMERA)
                     == PackageManager.PERMISSION_GRANTED)
@@ -160,17 +159,20 @@ public class FishHealthActivity extends AppCompatActivity
         }
 
         btnSubmit.setOnClickListener(v -> {
-            progressDialog.show();
-            requestClass = new SaveFishHealthRequestClass();
-            requestClass.pondId = pond.pondId;
-            requestClass.colorOfWater = colorOfWater.getText().toString().trim();
-            requestClass.mortality = mortality.getText().toString().trim();
-            requestClass.phLevel = Integer.parseInt(phLevel.getText().toString().trim());
-            requestClass.dissolvedOxygen = Integer.parseInt(Oxygen.getText().toString().trim());
-            requestClass.ammonia = Integer.parseInt(Ammonia.getText().toString().trim());
-            requestClass.nitrite = Integer.parseInt(Nitrite.getText().toString().trim());
-            requestClass.turbidity = Integer.parseInt(Turbidity.getText().toString().trim());
-            new saveHealth().execute();
+            if(validateFields()){
+                progressDialog.show();
+                requestClass = new SaveFishHealthRequestClass();
+                requestClass.pondId = pond.pondId;
+                requestClass.colorOfWater = colorOfWater.getText().toString().trim();
+                requestClass.mortality =Math.round(Float.parseFloat(mortality.getText().toString().trim()));
+                requestClass.phLevel = Float.parseFloat(phLevel.getText().toString().trim());
+                requestClass.dissolvedOxygen = Float.parseFloat(Oxygen.getText().toString().trim());
+                requestClass.ammonia = Float.parseFloat(Ammonia.getText().toString().trim());
+                requestClass.nitrite = Float.parseFloat(Nitrite.getText().toString().trim());
+                requestClass.turbidity = Float.parseFloat(Turbidity.getText().toString().trim());
+                requestClass.temperature = Float.parseFloat(Temperature.getText().toString().trim());
+                new saveHealth().execute();
+            }
         });
 
         relRecord.setOnClickListener(v -> AndroidAudioRecorder.with(FishHealthActivity.this)
@@ -186,7 +188,53 @@ public class FishHealthActivity extends AppCompatActivity
                 .setKeepDisplayOn(true)
                 // Start recording
                 .record());
+        }
 
+    private boolean validateFields(){
+        validationErrors.clear();
+         if (validateTor.isEmpty(colorOfWater.getText().toString().trim())) {
+            colorOfWater.setError("This field is required");
+            validationErrors.add("This field is required");
+        }
+        if (validateTor.isEmpty(mortality.getText().toString().trim()) || !validateTor.isDecimal(mortality.getText().toString().trim())) {
+            mortality.setError("This field is required and numeric");
+            validationErrors.add("This field is required and numeric");
+        }
+        if (validateTor.isEmpty(phLevel.getText().toString().trim()) || !validateTor.isDecimal(phLevel.getText().toString().trim())) {
+            phLevel.setError("This field is required and numeric");
+            validationErrors.add("This field is required and numeric");
+        }else{
+//            float plevel = 0;
+//            plevel=Float.parseFloat(phLevel.getText().toString().trim());
+//            if(!(plevel >=6.5 && plevel <=8.5)){
+//                phLevel.setError("This field is required and numeric");
+//                validationErrors.add("This field is required and numeric");
+//            }
+        }
+        if (validateTor.isEmpty(Oxygen.getText().toString().trim()) || !validateTor.isDecimal(Oxygen.getText().toString().trim())) {
+            Oxygen.setError("This field is required and numeric");
+            validationErrors.add("This field is required and numeric");
+        }
+        if (validateTor.isEmpty(Ammonia.getText().toString().trim()) || !validateTor.isDecimal(Ammonia.getText().toString().trim())) {
+            Ammonia.setError("This field is required and numeric");
+            validationErrors.add("This field is required and numeric");
+        }
+        if (validateTor.isEmpty(Nitrite.getText().toString().trim()) || !validateTor.isDecimal(Nitrite.getText().toString().trim())) {
+            Nitrite.setError("This field is required and numeric");
+            validationErrors.add("This field is required and numeric");
+        }
+        if (validateTor.isEmpty(Turbidity.getText().toString().trim()) || !validateTor.isDecimal(Turbidity.getText().toString().trim())) {
+            Turbidity.setError("This field is required and numeric");
+            validationErrors.add("This field is required and numeric");
+        }
+
+        if (validateTor.isEmpty(Temperature.getText().toString().trim()) || !validateTor.isDecimal(Temperature.getText().toString().trim())) {
+            Temperature.setError("This field is required and numeric");
+            validationErrors.add("This field is required and numeric");
+
+        }
+
+        return validationErrors.size() <= 0;
     }
 
     class saveHealth extends AsyncTask<Void, Void, Void>
@@ -207,14 +255,20 @@ public class FishHealthActivity extends AppCompatActivity
                     assert response.body() != null;
                     try
                     {
+
                         if (response.body().status.equals("00"))
                         {
                             new OoOAlertDialog.Builder(FishHealthActivity.this)
                                     .setTitle("Success")
                                     .setMessage("Data successfully saved")
                                     .setAnimation(Animation.POP)
-                                    .setPositiveButton("Ok", null)
-                                    .setPositiveButtonColor(R.color.green)
+                                    .setPositiveButton("Ok", new OnClickListener() {
+                                        @Override
+                                        public void onClick() {
+                                            onBackPressed();
+                                        }
+                                    })
+                                    .setPositiveButtonColor(R.color.positive)
                                     .build();
                         }
                         else
@@ -242,62 +296,7 @@ public class FishHealthActivity extends AppCompatActivity
         }
     }
 
-    class getFishHealth extends AsyncTask<Void, Void, Void>
-    {
 
-        @Override
-        protected Void doInBackground(Void... voids)
-        {
-            final Call<FishHealthClass> getFishHealth = acquahService.GetFishHealth(reqq,
-                    PrefsUtil.getTempTokenData(FishHealthActivity.this));
-            getFishHealth.enqueue(new Callback<FishHealthClass>()
-            {
-                @Override
-                public void onResponse(@NotNull Call<FishHealthClass> call, @NotNull Response<FishHealthClass> response)
-                {
-                    progressDialog.dismiss();
-                    assert response.body() != null;
-                    if (response.body().pondId > 0)
-                    {
-                        try
-                        {
-                               runOnUiThread(() -> {
-                               // colorOfWater.setText(response.body().colorOfWater);
-                               // WaterPicture.setText(response.body().waterPictureLink);
-                                mortality.setText(response.body().mortality);
-                                phLevel.setText(response.body().phLevel);
-                                Oxygen.setText(response.body().dissolvedOxygen);
-                                Temperature.setText(response.body().temperature);
-                                Ammonia.setText(response.body().ammonia);
-                                Nitrite.setText(response.body().nitrite);
-                                Turbidity.setText(response.body().turbidity);
-                            });
-                        }
-                        catch (Exception ex)
-                        {
-                            String error = ex.getMessage();
-                            Toast.makeText(FishHealthActivity.this, "Error loading data",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else
-                    {
-                        Toast.makeText(FishHealthActivity.this, "Error loading data",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<FishHealthClass> call, Throwable t)
-                {
-                    progressDialog.dismiss();
-                    Toast.makeText(FishHealthActivity.this, "Error loading data",
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
-            return null;
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)

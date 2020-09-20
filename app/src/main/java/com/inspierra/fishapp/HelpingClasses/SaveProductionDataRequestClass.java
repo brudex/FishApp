@@ -21,7 +21,7 @@ public class SaveProductionDataRequestClass
     public int noOfFriesStockingNursery;
     public int noOfFriesStockingRecovered;
     public int durationOfNursery;
-    public int finalAverageWeight;
+    public float finalAverageWeight;
     public int quantityOfFishHarvested;
     public int weightOfFishHarvested;
     public float pricePerKg;

@@ -194,7 +194,7 @@ public class SignupActivity extends AppCompatActivity
                         {
                             new AlertDialog.Builder(SignupActivity.this)
                                     .setTitle("Error")
-                                    .setMessage("Registration failed")
+                                    .setMessage(response.body().message)
                                     // A null listener allows the button to dismiss the dialog and take no further action.
                                     .setNegativeButton("retry", null)
                                     .setIcon(android.R.drawable.ic_dialog_alert)

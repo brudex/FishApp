@@ -10,29 +10,22 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/positive"
         android:text="Fish Farm Tracker"
         android:layout_centerHorizontal="true"
         android:textSize="30sp"
         android:id="@+id/txtfish"
         style="@style/TextAppearance.Default"
-        android:layout_marginTop="100dp"/>
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/fish_logo"
-        android:scaleType="centerCrop"
-        android:id="@+id/imgfish"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/txtfish"
-        android:layout_marginTop="30dp"
-        />
+        android:layout_marginTop="40dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_below="@+id/imgfish"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/txtfish"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:gravity="bottom"
+        android:layout_marginBottom="130dp">
         <com.dx.dxloadingbutton.lib.LoadingButton
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
@@ -55,7 +48,7 @@
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             style="@style/FormLabel.White"
-            app:lb_btnColor="@color/label_color"
+            app:lb_btnColor="@color/red"
             app:lb_btnText="Login"
             app:lb_cornerRadius="5"
             android:layout_weight="1"

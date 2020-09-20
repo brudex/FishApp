@@ -41,9 +41,22 @@
                 android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
-
         <RelativeLayout
-            android:id="@+id/relBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="10dp"
+            android:layout_marginTop="30dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fish_logo2"
+                android:layout_marginStart="0dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/imgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -65,17 +78,31 @@
                 android:layout_marginStart="30dp"/>
 
         </RelativeLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="60dp"
-            android:text="Fish Health Form"
-            android:layout_below="@id/relBack"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@+id/imgBack"
+            android:id="@+id/tvTitle"
+            android:text="Fish Health Management"
             style="@style/headerTitle2"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/tvTitle"
+            android:id="@+id/tvPondName"
+            android:text="Fish Health Management"
+            style="@style/headerTitle"
+            android:textSize="15sp"
             />
 
     </RelativeLayout>
@@ -85,6 +112,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:paddingBottom="20dp"
             android:layout_weight="0.3">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -366,19 +394,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
+                             android:gravity="center"
                             android:text="Nitrite"
                             style="@style/FormLabel.Gray"/>
                         <com.libizo.CustomEditText
                             android:id="@+id/Nitrite"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
-                            android:layout_marginBottom="15dp"
-                            android:inputType="numberDecimal"
+                             android:inputType="numberDecimal"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
@@ -407,15 +433,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
-                            android:layout_marginBottom="50dp"
-                            android:gravity="center"
+                             android:gravity="center"
                             android:text="Ammonia"
                             style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
                             android:id="@+id/Ammonia"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="50dp"
                             android:layout_marginStart="25dp"
                             android:layout_marginTop="30dp"
                             android:layout_marginEnd="25dp"
