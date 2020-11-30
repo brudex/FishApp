@@ -1,8 +1,6 @@
 package com.inspierra.fishapp.Utilities;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import com.google.gson.Gson;
 import com.inspierra.fishapp.HelpingClasses.LoginResponseClass;
 import com.inspierra.fishapp.HelpingClasses.ProfileClass;

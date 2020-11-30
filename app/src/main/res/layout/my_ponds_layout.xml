@@ -169,7 +169,7 @@
                         android:layout_marginStart="25dp"
                         android:layout_marginBottom="50dp"
                         android:gravity="center"
-                        android:text="Cubic Size (in meters square)"
+                        android:text="Cubic Size (in cubic meters)"
                         style="@style/FormLabel.Gray"/>
 
                     <com.libizo.CustomEditText

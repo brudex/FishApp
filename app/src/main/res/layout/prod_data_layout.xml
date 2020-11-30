@@ -628,7 +628,7 @@
                             android:layout_marginStart="25dp"
                             android:layout_marginBottom="50dp"
                             android:gravity="center"
-                            android:text="No. of Fries Stocked"
+                            android:text="No. of Frys Stocked"
                             style="@style/FormLabel.Gray"/>
 
                         <com.libizo.CustomEditText
@@ -667,7 +667,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
                              android:gravity="center"
-                            android:text="No. of Fries Recovered"
+                            android:text="No. of Frys Recovered"
                             style="@style/FormLabel.Gray" />
 
                         <com.libizo.CustomEditText
@@ -824,7 +824,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="25dp"
                              android:gravity="center"
-                            android:text="No Fries Stocked During Nursery"
+                            android:text="No Frys Stocked During Nursery"
                             style="@style/FormLabel.Gray"/>
 
                         <com.libizo.CustomEditText
